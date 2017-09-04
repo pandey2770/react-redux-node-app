@@ -3,10 +3,10 @@ import './index.css';
 
 class Views extends Component {
   render() {
-    return(
-          <div className="viwes">
-            <p>ssdn</p>
-          </div>
+    return (
+      <div className="viwes">
+        <p>ssdn</p>
+      </div>
     );
   }
 }

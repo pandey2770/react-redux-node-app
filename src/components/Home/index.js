@@ -4,7 +4,7 @@ class Home extends Component {
   render() {
     return (
       <div className="background">
-                <div className="button-share">
+        <div className="button-share">
           <button>Write A View</button>
         </div>
       </div>

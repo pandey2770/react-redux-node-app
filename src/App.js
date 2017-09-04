@@ -7,10 +7,10 @@ import { Switch, Route } from 'react-router-dom';
 class App extends Component {
   render() {
     return (
-      <div style={{height: '100%'}}>
+      <div style={{ height: '100%' }}>
         <Header />
         <Switch>
-          <Route exact={true} path="/" component={Home}/>
+          <Route exact={true} path="/" component={Home} />
           <Route exact={true} path="/Views" component={Views} />
         </Switch>
       </div>
