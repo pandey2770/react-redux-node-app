@@ -1,32 +1,13 @@
 import React, { Component } from 'react';
 import './styles.css';
 
-function uploadImage (event, targetElementId) {
-  var file = event.target.files[0];
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'https://api.imgur.com/3/image');
-  xhr.setRequestHeader('Authorization', 'Client-ID 8d26ccd12712fca');
-  var data = new FormData();
-  data.append('image', file);
-  xhr.send(data);
-  xhr.addEventListener('load', () => {
-    var imgSrc = JSON.parse(xhr.responseText).data.link;
-  });
-}
-
 class Home extends Component {
   state = {
-    showModal: false
+    showModal: false,
+    isGoing: true
   };
 
-  constructor (props){
-    super(props);
-    this.state={
-      isGoing:true,
-    };
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
-  handleInputChange(event){
+  handleInputChange = (event) => {
     const { name, value } = event.target;
     const state = {};
     state[`${name}`] = value;
@@ -60,7 +41,6 @@ class Home extends Component {
         <input
           type="file" 
           className="home-input" 
-          onChange="uploadImage(event)" 
         />
         <textarea
           name="message"
@@ -84,7 +64,7 @@ class Home extends Component {
   }
 
   render() {
-    const { showModal, showData, name, message, place } = this.state;
+    const { showModal } = this.state;
     return (
       <div className="home-wrapper">
         <div className="home-share">
