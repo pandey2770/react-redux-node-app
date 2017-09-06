@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './index.css';
+import './styles.css';
 
 class Views extends Component {
   render() {
     return (
-      <div className="viwes">
+      <div className="views-wrapper">
         <p>ssdn</p>
       </div>
     );

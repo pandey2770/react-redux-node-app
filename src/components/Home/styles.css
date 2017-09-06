@@ -1,4 +1,10 @@
-.button-share {
+.home-wrapper {
+  background-image: url(../../img/bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+.home-share {
   width: 100px;
   height: 100px;
   position: absolute;
@@ -7,8 +13,10 @@
   right: 0;
   margin: auto;
 }
-
-.form-home {
+.home-modal {
+  text-align: center;
+}
+.home-input {
   border-top: none;
   border-right: none;
   background-color: transparent;
@@ -21,7 +29,4 @@
   font-family: 'Josefin Slab', serif;
   margin-top: 25px;
   margin-left: 75px;
-}
-.view{
-  text-align: center;
 }
