@@ -62,7 +62,6 @@ class Home extends Component {
           className="home-input" 
           onChange="uploadImage(event)" 
         />
-
         <textarea
           name="message"
           className="home-input" 
