@@ -1,4 +1,4 @@
-.header-meanu {
+.header-wrapper {
   background-color: #44a1d6;
   opacity: 0.7;
   height: 65px;
@@ -8,16 +8,16 @@
   width: 100%;
   top: 0px;
 }
-.menu {
+.header-menu {
   display: flex;
   width: 250px;
   justify-content: space-between;
 }
-.image {
+.header-logo {
   height: 55px;
   margin-top: 5px;
 }
-.button {
+.header-link {
   background: transparent;
   font-family: 'Josefin Slab', serif;
   border: none;
@@ -26,4 +26,5 @@
   font-size: 35px;
   outline: none;
   cursor: pointer;
+  text-decoration: none;
 }

@@ -1,31 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../img/logo.png';
-import './index.css';
+import './styles.css';
 
-class Header extends Component {
-  render() {
-    return (
-      <div>
-        <div className="header-meanu">
-          <div>
-            <img src={logo} className="image" alt="site logo" />
-          </div>
-          <div className="menu">
-            <div>
-              <Link to="/">
-                <button className="button">Home</button>
-              </Link>
-            </div>
-            <div>
-              <Link to="/views">
-                <button className="button">Views</button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+const Header = () =>
+  <div className="header-wrapper">
+    <img src={logo} className="header-logo" alt="site logo" />
+    <div className="header-menu">
+      <Link to="/" className="header-link">
+        Home
+      </Link>
+      <Link to="/views" className="header-link">
+        Views
+      </Link>
+    </div>
+  </div>;
+
 export default Header;
