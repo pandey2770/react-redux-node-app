@@ -1,32 +1,37 @@
-.home-wrapper {
-  background-image: url(../../img/bg.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100%;
+
+.view-come {
+  font-size: larger;
+  padding-left: 20px;
+  background: antiquewhite;
+  height: 30px;
+  margin-bottom: 2px;
+  padding-top: 15px;
+  width: 30%;
 }
-.home-share {
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-.home-modal {
-  text-align: center;
+.button-come {
+  float: right;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 .home-input {
-  border-top: none;
-  border-right: none;
-  background-color: transparent;
-  border-left: none;
-  border-bottom-style: dotted;
-  border-color: #242528;
-  outline: none;
   font-size: medium;
   resize: none;
   font-family: 'Josefin Slab', serif;
-  margin-top: 25px;
-  margin-left: 75px;
+}
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+}
+.centered1 {
+  width: 100%;
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
 }

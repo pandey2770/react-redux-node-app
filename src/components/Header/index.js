@@ -5,7 +5,6 @@ import './styles.css';
 
 const Header = () =>
   <div className="header-wrapper">
-    <img src={logo} className="header-logo" alt="site logo" />
     <div className="header-menu">
       <Link to="/" className="header-link">
         Home

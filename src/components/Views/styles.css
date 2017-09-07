@@ -1,4 +1,8 @@
-.views-wrapper {
-  /*todo: why is this high margin needed ?*/
-  margin: 130px 0px 0px 50px;
+
+.view-section-hide {
+  float: right;
+  margin-top: -30px;
+}
+.none {
+  display: none;
 }

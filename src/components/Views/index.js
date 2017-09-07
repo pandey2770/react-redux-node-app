@@ -7,7 +7,6 @@ class Views extends Component {
     const { share } = this.props;
     return (
       <div className="views-wrapper">
-        <p>ssdn</p>
         {share.map(s => <div key={s}>{s}</div>)}
       </div>
     );
