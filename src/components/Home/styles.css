@@ -1,12 +1,19 @@
-
-.view-come {
+.task {
   font-size: larger;
   padding-left: 20px;
-  background: antiquewhite;
   height: 30px;
   margin-bottom: 2px;
   padding-top: 15px;
   width: 30%;
+}
+.task_new {
+  background: antiquewhite;
+}
+.task_done {
+  background-color: antiquewhite;
+  opacity: .5;
+  color: white;
+  text-decoration: line-through;
 }
 .button-come {
   float: right;

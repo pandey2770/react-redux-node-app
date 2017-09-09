@@ -1,3 +1,9 @@
 .app-wrapper {
   height: 100%;
 }
+.add {
+  background-color: antiquewhite;
+  opacity: .5;
+  color: white;
+  text-decoration: line-through;
+}

@@ -1,14 +1,19 @@
-export const addTask = (text) => {
+export const addTask = text => {
   return {
     type: 'ADD_TASK',
     text
-  }
-}
+  };
+};
 
-export const removeTask = (index) => {
-  console.log('into action class')
+export const removeTask = index => {
   return {
     type: 'REMOVE_TASK',
     index
-  }
-}
+  };
+};
+export const doneTask = index => {
+  return {
+    type: 'DONE_TASK',
+    index
+  };
+};

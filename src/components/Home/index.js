@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addTask, removeTask } from '../../actions';
-import { Link } from 'react-router-dom';
+import classNames from 'classnames';
+import { addTask, removeTask, doneTask} from '../../actions';
 import './styles.css';
 
 
@@ -28,8 +28,13 @@ class Home extends Component {
     const { index } = event.target.dataset;
     const { removeTask } = this.props;    
     if (index) {
-      removeTask(parseInt(index));
+      removeTask(parseInt(index, 10));
     }
+  }
+  done =(event)=>{
+    const { index }= event.target.dataset;
+    const { doneTask } = this.props;
+    doneTask(parseInt(index, 10));
   }
 
   render() {
@@ -51,7 +56,14 @@ class Home extends Component {
         </div>
         <div className="centered1">
           {this.props.task.map((task, index) =>
-            <div  className="view-come" key={`${index}-${task.des}`}>
+            <div
+              className={classNames('task', {
+                'task_new': task.state === 'NEW',
+                'task_done': task.state === 'DONE',
+              })}
+              key={`${index}-${task.des}`}
+            >
+              <button data-index={index} onClick={this.done}>d</button>
               <span>{task.des}</span>
               <button data-index={index} onClick={this.delet} className="button-come">X</button>
             </div>)}
@@ -68,7 +80,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     addTask: (text) => dispatch(addTask(text)),
-    removeTask: (index) => dispatch(removeTask(index))
+    removeTask: (index) => dispatch(removeTask(index)),
+    doneTask: (index) => dispatch(doneTask(index))
   }
 };
 
