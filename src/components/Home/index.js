@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addShare } from '../../actions';
+import { addShare, removeShare } from '../../actions';
 import { Link } from 'react-router-dom';
 import './styles.css';
+
 
 class Home extends Component {
   state = {
@@ -21,15 +22,22 @@ class Home extends Component {
   };
 
   delet =(event)=>{
-
+    const { index } = event.target.dataset;
+    const { removeShare } = this.props;    
+    if (index) {
+      removeShare(parseInt(index));
+    }
   }
+
   render() {
+    const { message } = this.state;
     return (
       <div>
         <div className="centered">
           <textarea
             className="home-input" 
             placeholder="Task"
+            value={message}
             onChange={this.onMessageChange}
           />
           <input 
@@ -40,8 +48,8 @@ class Home extends Component {
         </div>
         <div className="centered1">
           {this.props.share.map((share, index) =>
-            <div  className="view-come" key={share}>
-              {share}
+            <div  className="view-come" key={`${index}-${share}`}>
+              <span>{share}</span>
               <button data-index={index} onClick={this.delet} className="button-come">X</button>
             </div>)}
         </div>
@@ -56,7 +64,8 @@ const mapStateToProps = (state) => ({
   
 const mapDispatchToProps = (dispatch) => {
   return {
-    addShare: (text) => dispatch(addShare(text))
+    addShare: (text) => dispatch(addShare(text)),
+    removeShare: (index) => dispatch(removeShare(index))
   }
 };
 
