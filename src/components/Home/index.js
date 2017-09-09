@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addShare, removeShare } from '../../actions';
+import { addTask, removeTask } from '../../actions';
 import { Link } from 'react-router-dom';
 import './styles.css';
 
@@ -9,47 +9,50 @@ class Home extends Component {
   state = {
   };
 
-  onMessageChange = (event) => {
+  onDesChange = (event) => {
     this.setState({
-      message: event.target.value,
+      des: event.target.value,
     });
   }
 
-  addToShare = () => {
-    const { addShare } = this.props;
-    const { message } = this.state;
-    addShare(message);
+  addToTask = () => {
+    const { addTask } = this.props;
+    const { des } = this.state;
+    addTask({ des, state:'NEW' });
+    this.setState({
+      des: '',
+    });
   };
 
   delet =(event)=>{
     const { index } = event.target.dataset;
-    const { removeShare } = this.props;    
+    const { removeTask } = this.props;    
     if (index) {
-      removeShare(parseInt(index));
+      removeTask(parseInt(index));
     }
   }
 
   render() {
-    const { message } = this.state;
+    const { des } = this.state;
     return (
       <div>
         <div className="centered">
           <textarea
             className="home-input" 
             placeholder="Task"
-            value={message}
-            onChange={this.onMessageChange}
+            value={des}
+            onChange={this.onDesChange}
           />
           <input 
             type="button"
-            value="Share"
-            onClick={this.addToShare}
+            value="Task"
+            onClick={this.addToTask}
           />
         </div>
         <div className="centered1">
-          {this.props.share.map((share, index) =>
-            <div  className="view-come" key={`${index}-${share}`}>
-              <span>{share}</span>
+          {this.props.task.map((task, index) =>
+            <div  className="view-come" key={`${index}-${task.des}`}>
+              <span>{task.des}</span>
               <button data-index={index} onClick={this.delet} className="button-come">X</button>
             </div>)}
         </div>
@@ -59,13 +62,13 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  share: state.share
+  task: state.task
 });
   
 const mapDispatchToProps = (dispatch) => {
   return {
-    addShare: (text) => dispatch(addShare(text)),
-    removeShare: (index) => dispatch(removeShare(index))
+    addTask: (text) => dispatch(addTask(text)),
+    removeTask: (index) => dispatch(removeTask(index))
   }
 };
 

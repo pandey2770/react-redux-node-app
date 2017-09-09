@@ -1,14 +1,14 @@
-export const addShare = (text) => {
+export const addTask = (text) => {
   return {
-    type: 'ADD_SHARE',
+    type: 'ADD_TASK',
     text
   }
 }
 
-export const removeShare = (index) => {
+export const removeTask = (index) => {
   console.log('into action class')
   return {
-    type: 'REMOVE_SHARE',
+    type: 'REMOVE_TASK',
     index
   }
 }
