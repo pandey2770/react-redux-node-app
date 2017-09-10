@@ -1,0 +1,26 @@
+{
+  "name": "react-redux-node-app",
+  "version": "0.1.0",
+  "description": "Web application to manage my todo list",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pandey2770/react-redux-node-app.git"
+  },
+  "keywords": [
+    "Node",
+    "Server"
+  ],
+  "author": "Jyoti Puri <jyotipuri@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pandey2770/react-redux-node-app/issues"
+  },
+  "homepage": "https://github.com/pandey2770/react-redux-node-app#readme",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
+}
