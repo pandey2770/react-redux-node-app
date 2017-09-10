@@ -27,6 +27,7 @@ export const removeTask = index => {
     index
   };
 };
+
 export const doneTask = index => {
   return {
     type: 'DONE_TASK',
