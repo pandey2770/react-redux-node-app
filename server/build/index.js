@@ -12,8 +12,8 @@ app.delete('/api/tasks', function (req, res) {
 });
 
 app.put('/api/tasks', function (req, res) {
-  res.json(tasks.put());
-});
+ res.json(tasks.put());
+ });
 
 app.listen(3001, function () {
   return console.log("Server started on port 3001");

@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/pandey2770/react-redux-node-app#readme",
   "dependencies": {
+    "body-parser": "^1.18.1",
     "express": "^4.15.4",
     "pg": "^7.3.0"
   },
