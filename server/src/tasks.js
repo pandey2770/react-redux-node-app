@@ -19,10 +19,17 @@ async function doneTasks(id) {
     values: [ id ],
   };
   return await DB.mutate(query);
-  console.log('asd',doneTasks)
+}
+async function undoneTasks(id) {
+  const query = {
+    text: "UPDATE tasks set state = 'UNDONE' where id = $1",
+    values: [ id ],
+  };
+  return await DB.mutate(query);
 }
 module.exports = {
   getAllTasks,
   deleteTask,
-  doneTasks
+  doneTasks,
+  undoneTasks
 };

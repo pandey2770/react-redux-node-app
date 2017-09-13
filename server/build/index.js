@@ -13,7 +13,6 @@ app.delete('/api/tasks', function (req, res) {
 
 app.put('/api/tasks', function (req, res) {
   res.json(tasks.put());
-  console.log(put,'asd',tasks);
 });
 
 app.listen(3001, function () {

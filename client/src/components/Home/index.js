@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { getTasks, addTask, deleteTask, markTaskCompleted } from '../../actions';
+import { getTasks, addTask, deleteTask, markTaskCompleted, markTaskunCompleted } from '../../actions';
 import './styles.css';
 
 
@@ -41,6 +41,11 @@ class Home extends Component {
     markTaskCompleted(parseInt(index, 10));
   }
 
+  undone =(event)=>{
+    const { index }= event.target.dataset;
+    const { markTaskunCompleted } = this.props;
+    markTaskunCompleted(parseInt(index, 10));
+  }
   render() {
     const { des } = this.state;
     return (
@@ -68,6 +73,7 @@ class Home extends Component {
               key={`${index}-${task.des}`}
             >
               <button data-index={index} onClick={this.done}>d</button>
+              <button data-index={index} onClick={this.undone}>ud</button>
               <span>{task.des}</span>
               <button data-index={index} onClick={this.delet} className="button-come">X</button>
             </div>)}
@@ -86,7 +92,8 @@ const mapDispatchToProps = (dispatch) => {
     getTasks: () => dispatch(getTasks()),
     addTask: (text) => dispatch(addTask(text)),
     deleteTask: (index) => dispatch(deleteTask(index)),
-    markTaskCompleted: (index) => dispatch(markTaskCompleted(index))
+    markTaskCompleted: (index) => dispatch(markTaskCompleted(index)),
+    markTaskunCompleted: (index) => dispatch(markTaskunCompleted(index))
   }
 };
 

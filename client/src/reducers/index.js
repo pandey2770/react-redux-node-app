@@ -13,6 +13,10 @@ function task(state = [], action) {
       const task = state[action.index];
       state[action.index] = { ...task, state: 'DONE' };
       return [...state];
+      case 'UNDONE_TASK':
+      const unTask = state[action.index];
+      state[action.index] = { ...task, state: 'NEW' };
+      return [...state];
     default:
       return state;
   }

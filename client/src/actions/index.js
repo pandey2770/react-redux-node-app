@@ -40,10 +40,21 @@ export const doneTask = index => {
     index
   };
 };
+export const undoneTask = index => {
+  return {
+    type: 'UNDONE_TASK',
+    index
+  };
+};
 export const markTaskCompleted = index => {
   return async function (dispatch) {
-    console.log('asd', index);
     await axios.put(`/api/tasks/${index}`)
     return dispatch(doneTask(index));
+  };
+};
+export const markTaskunCompleted = index => {
+  return async function (dispatch) {
+    await axios.put(`/api/tasks/${index}`)
+    return dispatch(undoneTask(index));
   };
 };
