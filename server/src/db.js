@@ -13,12 +13,11 @@ async function get(query) {
   return res.rows;
 }
 
-async function insert(query) {
+async function mutate(query) {
   const res = await pool.query(query);
   return res.rowCount;
 }
-
 module.exports = {
   get,
-  insert
+  mutate,
 };

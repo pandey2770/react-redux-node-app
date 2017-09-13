@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { getTasks, addTask, removeTask, doneTask } from '../../actions';
+import { getTasks, addTask, deleteTask, markTaskCompleted } from '../../actions';
 import './styles.css';
 
 
@@ -30,15 +30,15 @@ class Home extends Component {
 
   delet =(event)=>{
     const { index } = event.target.dataset;
-    const { removeTask } = this.props;    
+    const { deleteTask } = this.props;    
     if (index) {
-      removeTask(parseInt(index, 10));
+      deleteTask(parseInt(index, 10));
     }
   }
   done =(event)=>{
     const { index }= event.target.dataset;
-    const { doneTask } = this.props;
-    doneTask(parseInt(index, 10));
+    const { markTaskCompleted } = this.props;
+    markTaskCompleted(parseInt(index, 10));
   }
 
   render() {
@@ -85,8 +85,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getTasks: () => dispatch(getTasks()),
     addTask: (text) => dispatch(addTask(text)),
-    removeTask: (index) => dispatch(removeTask(index)),
-    doneTask: (index) => dispatch(doneTask(index))
+    deleteTask: (index) => dispatch(deleteTask(index)),
+    markTaskCompleted: (index) => dispatch(markTaskCompleted(index))
   }
 };
 

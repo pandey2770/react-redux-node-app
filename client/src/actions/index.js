@@ -15,22 +15,35 @@ export const addAllTasks = (tasks) => {
 }
 
 export const addTask = text => {
-  return {
-    type: 'ADD_TASK',
-    text
+  return async function (ADD_TASK) {
+    const { text } = await axios.addTask('/api/tasks')
   };
 };
 
-export const removeTask = index => {
+export const deleteTask = index => {
+  return async function (dispatch) {
+    await axios.delete(`/api/tasks/${index}`)
+    return dispatch(removeTask(index));
+  };
+};
+
+export const removeTask = (index) => {
   return {
     type: 'REMOVE_TASK',
     index
   };
-};
+}
 
 export const doneTask = index => {
   return {
     type: 'DONE_TASK',
     index
+  };
+};
+export const markTaskCompleted = index => {
+  return async function (dispatch) {
+    console.log('asd', index);
+    await axios.put(`/api/tasks/${index}`)
+    return dispatch(doneTask(index));
   };
 };
