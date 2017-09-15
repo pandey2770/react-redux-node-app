@@ -1,60 +1,60 @@
 import axios from 'axios';
 
+// Fetch tasks from backend
 export const getTasks = () => {
   return async function (dispatch) {
     const { data } = await axios.get('/api/tasks')
-    return dispatch(addAllTasks(data));
+    return dispatch(getTasksDispatch(data));
   };
 }
 
-export const addAllTasks = (tasks) => {
+export const getTasksDispatch = (tasks) => {
   return {
     type: 'ADD_ALL_TASK',
     tasks
   };
 }
 
-export const addTask = text => {
-  return async function (ADD_TASK) {
-    const { text } = await axios.addTask('/api/tasks')
+// Create a new task
+export const dispatchCreateTask = (text) => {
+  return {
+    text:'CREATE_TASK',
+  };
+}
+
+export const createTask = (task) => {
+  return async function (dispatch) {
+    await axios.post('/api/tasks/', { task });
+    return dispatch(dispatchCreateTask(task));
   };
 };
 
+// Delete a task
 export const deleteTask = index => {
   return async function (dispatch) {
     await axios.delete(`/api/tasks/${index}`)
-    return dispatch(removeTask(index));
+    return dispatch(deleteTaskDispatch(index));
   };
 };
 
-export const removeTask = (index) => {
+export const deleteTaskDispatch = (index) => {
   return {
     type: 'REMOVE_TASK',
     index
   };
 }
 
-export const doneTask = index => {
-  return {
-    type: 'DONE_TASK',
-    index
-  };
-};
-export const undoneTask = index => {
-  return {
-    type: 'UNDONE_TASK',
-    index
-  };
-};
-export const markTaskCompleted = index => {
+export const updateTask = (index, state) => {
   return async function (dispatch) {
-    await axios.put(`/api/tasks/${index}`)
-    return dispatch(doneTask(index));
+    await axios.put(`/api/tasks/${index}`, { state })
+    return dispatch(updateTaskDispatch(index, state));
   };
 };
-export const markTaskunCompleted = index => {
-  return async function (dispatch) {
-    await axios.put(`/api/tasks/${index}`)
-    return dispatch(undoneTask(index));
+
+export const updateTaskDispatch = (index, state) => {
+  return {
+    type: 'UPDATE_TASK',
+    index,
+    state
   };
 };

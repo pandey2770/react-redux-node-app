@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { getTasks, addTask, deleteTask, markTaskCompleted, markTaskunCompleted } from '../../actions';
+import { getTasks, createTask, deleteTask, updateTask } from '../../actions';
 import './styles.css';
 
 
@@ -19,32 +19,33 @@ class Home extends Component {
     });
   }
 
-  addToTask = () => {
-    const { addTask } = this.props;
+  createTask = () => {
+    const { createTask } = this.props;
     const { des } = this.state;
-    addTask({ des, state:'NEW' });
+    createTask({ id: 10, des, state:'NEW' });
     this.setState({
       des: '',
     });
   };
 
-  delet =(event)=>{
+  deleteTask =(event)=>{
     const { index } = event.target.dataset;
     const { deleteTask } = this.props;    
     if (index) {
       deleteTask(parseInt(index, 10));
     }
   }
-  done =(event)=>{
+
+  markAsDone = (event) => {
     const { index }= event.target.dataset;
-    const { markTaskCompleted } = this.props;
-    markTaskCompleted(parseInt(index, 10));
+    const { updateTask } = this.props;
+    updateTask(parseInt(index, 10), 'DONE');
   }
 
-  undone =(event)=>{
+  markAsUndone = (event) =>{
     const { index }= event.target.dataset;
-    const { markTaskunCompleted } = this.props;
-    markTaskunCompleted(parseInt(index, 10));
+    const { updateTask } = this.props;
+    updateTask(parseInt(index, 10), 'NEW');
   }
   render() {
     const { des } = this.state;
@@ -60,7 +61,7 @@ class Home extends Component {
           <input 
             type="button"
             value="Task"
-            onClick={this.addToTask}
+            onClick={this.createTask}
           />
         </div>
         <div className="centered1">
@@ -72,10 +73,11 @@ class Home extends Component {
               })}
               key={`${index}-${task.des}`}
             >
-              <button data-index={index} onClick={this.done}>d</button>
-              <button data-index={index} onClick={this.undone}>ud</button>
+              {task.state === 'NEW' ?
+                <button data-index={index} onClick={this.markAsDone}>d</button>:
+                <button data-index={index} onClick={this.markAsUndone}>ud</button>}
               <span>{task.des}</span>
-              <button data-index={index} onClick={this.delet} className="button-come">X</button>
+              <button data-index={index} onClick={this.deleteTask} className="button-come">X</button>
             </div>)}
         </div>
       </div>
@@ -90,10 +92,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     getTasks: () => dispatch(getTasks()),
-    addTask: (text) => dispatch(addTask(text)),
+    createTask: (task) => dispatch(createTask(task)),
     deleteTask: (index) => dispatch(deleteTask(index)),
-    markTaskCompleted: (index) => dispatch(markTaskCompleted(index)),
-    markTaskunCompleted: (index) => dispatch(markTaskunCompleted(index))
+    updateTask: (index, state) => dispatch(updateTask(index, state))
   }
 };
 

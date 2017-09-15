@@ -15,6 +15,11 @@ app.delete('/api/tasks/:id', async (req, res) => {
   res.json({ id: req.params.id });
 });
 
+app.post('/api/tasks', async (req, res) => {
+  await tasks.createTask(req.body.task);
+  res.json(req.body.task);
+});
+
 app.put('/api/tasks/:id', async (req, res) => {
   await tasks.updateTask(req.params.id, req.body.state);
   res.json({ id: req.params.id });
