@@ -22,30 +22,30 @@ class Home extends Component {
   createTask = () => {
     const { createTask } = this.props;
     const { des } = this.state;
-    createTask({ id: 10, des, state:'NEW' });
+    createTask({ des, state:'NEW' });
     this.setState({
       des: '',
     });
   };
 
   deleteTask =(event)=>{
-    const { index } = event.target.dataset;
+    const { id } = event.target.dataset;
     const { deleteTask } = this.props;    
-    if (index) {
-      deleteTask(parseInt(index, 10));
+    if (id) {
+      deleteTask(id);
     }
   }
 
   markAsDone = (event) => {
-    const { index }= event.target.dataset;
+    const { id }= event.target.dataset;
     const { updateTask } = this.props;
-    updateTask(parseInt(index, 10), 'DONE');
+    updateTask(id, 'DONE');
   }
 
   markAsUndone = (event) =>{
-    const { index }= event.target.dataset;
+    const { id }= event.target.dataset;
     const { updateTask } = this.props;
-    updateTask(parseInt(index, 10), 'NEW');
+    updateTask(id, 'NEW');
   }
   render() {
     const { des } = this.state;
@@ -65,19 +65,19 @@ class Home extends Component {
           />
         </div>
         <div className="centered1">
-          {this.props.task.map((task, index) =>
+          {this.props.task.map(task =>
             <div
               className={classNames('task', {
                 'task_new': task.state === 'NEW',
                 'task_done': task.state === 'DONE',
               })}
-              key={`${index}-${task.des}`}
+              key={task.id}
             >
               {task.state === 'NEW' ?
-                <button data-index={index} onClick={this.markAsDone}>d</button>:
-                <button data-index={index} onClick={this.markAsUndone}>ud</button>}
+                <button data-id={task.id} onClick={this.markAsDone}>d</button>:
+                <button data-id={task.id} onClick={this.markAsUndone}>ud</button>}
               <span>{task.des}</span>
-              <button data-index={index} onClick={this.deleteTask} className="button-come">X</button>
+              <button data-id={task.id} onClick={this.deleteTask} className="button-come">X</button>
             </div>)}
         </div>
       </div>
@@ -93,8 +93,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getTasks: () => dispatch(getTasks()),
     createTask: (task) => dispatch(createTask(task)),
-    deleteTask: (index) => dispatch(deleteTask(index)),
-    updateTask: (index, state) => dispatch(updateTask(index, state))
+    deleteTask: (id) => dispatch(deleteTask(id)),
+    updateTask: (id, state) => dispatch(updateTask(id, state))
   }
 };
 

@@ -16,45 +16,47 @@ export const getTasksDispatch = (tasks) => {
 }
 
 // Create a new task
-export const dispatchCreateTask = (text) => {
+export const dispatchCreateTask = (task) => {
   return {
-    text:'CREATE_TASK',
+    type:'CREATE_TASK',
+    task
   };
 }
 
 export const createTask = (task) => {
   return async function (dispatch) {
-    await axios.post('/api/tasks/', { task });
-    return dispatch(dispatchCreateTask(task));
+    const taskId = await axios.post('/api/tasks/', { task });
+    const newTask = { id: taskId, ...task}
+    return dispatch(dispatchCreateTask(newTask));
   };
 };
 
 // Delete a task
-export const deleteTask = index => {
+export const deleteTask = id => {
   return async function (dispatch) {
-    await axios.delete(`/api/tasks/${index}`)
-    return dispatch(deleteTaskDispatch(index));
+    await axios.delete(`/api/tasks/${id}`)
+    return dispatch(deleteTaskDispatch(id));
   };
 };
 
-export const deleteTaskDispatch = (index) => {
+export const deleteTaskDispatch = (id) => {
   return {
     type: 'REMOVE_TASK',
-    index
+    id
   };
 }
 
-export const updateTask = (index, state) => {
+export const updateTask = (id, state) => {
   return async function (dispatch) {
-    await axios.put(`/api/tasks/${index}`, { state })
-    return dispatch(updateTaskDispatch(index, state));
+    await axios.put(`/api/tasks/${id}`, { state })
+    return dispatch(updateTaskDispatch(id, state));
   };
 };
 
-export const updateTaskDispatch = (index, state) => {
+export const updateTaskDispatch = (id, state) => {
   return {
     type: 'UPDATE_TASK',
-    index,
+    id,
     state
   };
 };

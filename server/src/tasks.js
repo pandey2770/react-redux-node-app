@@ -1,3 +1,4 @@
+const uuidv1 = require("uuid/v1");
 const DB = require("./db");
 
 async function getAllTasks() {
@@ -14,11 +15,13 @@ async function deleteTask(id) {
 }
 
 async function createTask(task) {
+  const id = uuidv1();
   const query = {
     text: "INSERT INTO tasks VALUES($1, $2, $3)",
-    values: [ task.id, task.des, task.state ],
+    values: [ id, task.des, task.state ],
   };
-  return await DB.mutate(query);
+  await DB.mutate(query);
+  return id;
 }
 
 async function updateTask(id, state) {

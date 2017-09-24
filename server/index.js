@@ -15,9 +15,9 @@ app.delete('/api/tasks/:id', async (req, res) => {
   res.json({ id: req.params.id });
 });
 
-app.post('/api/tasks', async (req, res) => {
-  await tasks.createTask(req.body.task);
-  res.json(req.body.task);
+app.post('/api/tasks', (req, res) => {
+  const taskId = tasks.createTask(req.body.task);
+  res.json(taskId);
 });
 
 app.put('/api/tasks/:id', async (req, res) => {

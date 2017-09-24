@@ -1,17 +1,19 @@
 import { combineReducers } from 'redux';
 
 function task(state = [], action) {
+  let index;
   switch (action.type) {
     case 'ADD_ALL_TASK':
       return [...state, ...action.tasks];
     case 'CREATE_TASK':
-      return [...state, action.text];
+      return [...state, action.task];
     case 'REMOVE_TASK':
-      state.splice(action.index, 1);
+      index = state.findIndex(task => task.id === action.id);
+      state.splice(index, 1);
       return [...state];
     case 'UPDATE_TASK':
-      const task = state[action.index];
-      state[action.index] = { ...task, state: action.state };
+      index = state.findIndex(task => task.id === action.id);
+      state[index] = { ...state[index], state: action.state };
       return [...state];
     default:
       return state;
