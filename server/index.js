@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var tasks = require('./src/tasks');
+var recodr = require('./src/recodr');
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
@@ -8,6 +9,11 @@ app.use(bodyParser.json());
 app.get('/api/tasks', async (req, res) => {
   const taskList = await tasks.getAllTasks();
   res.json(taskList);
+});
+
+app.get('/api/recodr', async (req, res) => {
+  const recodrList = await recodr.getAllRecodr();
+  res.json(recodrList);
 });
 
 app.delete('/api/tasks/:id', async (req, res) => {
