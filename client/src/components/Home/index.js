@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 import { getTasks, createTask, deleteTask, updateTask } from '../../actions';
 import './styles.css';
 
@@ -76,7 +77,7 @@ class Home extends Component {
               {task.state === 'NEW' ?
                 <button data-id={task.id} onClick={this.markAsDone}>d</button>:
                 <button data-id={task.id} onClick={this.markAsUndone}>ud</button>}
-              <span>{task.des}</span>
+              <span><Link to={`/Task/${task.id}`}>{task.des}</Link></span>
               <button data-id={task.id} onClick={this.deleteTask} className="button-come">X</button>
             </div>)}
         </div>
