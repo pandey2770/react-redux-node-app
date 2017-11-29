@@ -6,19 +6,11 @@ async function getAllRecodr() {
   return recodr;
 }
 
-async function deleteRecodr(id) {
-  const query = {
-    text: "DELETE FROM recodr WHERE id = $1",
-    values: [ id ],
-  };
-  return await DB.mutate(query);
-}
-
-async function createRecodr(recodr) {
+async function createRecodr(des, time  ) {
   const id = uuidv1();
   const query = {
-    text: "INSERT INTO recodr VALUES($1, $2, $3, $4)",
-    values: [ id, recodr.des, recodr.time, recodr.delete ],
+    text: "INSERT INTO recodr VALUES($1, $2, $3 )",
+    values: [ id, des, time  ],
   };
   await DB.mutate(query);
   return id;
@@ -34,7 +26,6 @@ async function updateRecodr(id, time) {
 
 module.exports = {
   getAllRecodr,
-  deleteRecodr,
   updateRecodr,
   createRecodr
 };

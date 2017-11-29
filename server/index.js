@@ -26,6 +26,11 @@ app.post('/api/tasks', (req, res) => {
   res.json(taskId);
 });
 
+app.post('/api/recodr', (req, res) => {
+  const recodrId = recodr.createRecodr(req.body.recodr);
+  res.json(recodrId);
+});
+
 app.put('/api/tasks/:id', async (req, res) => {
   await tasks.updateTask(req.params.id, req.body.state);
   res.json({ id: req.params.id });
