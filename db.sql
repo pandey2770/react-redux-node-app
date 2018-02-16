@@ -7,10 +7,19 @@ DB setup:
 - grant all privileges on tasks to myuser;
 
 
+
 CREATE TABLE tasks (
-  id numeric CONSTRAINT taskprimarykey PRIMARY KEY,
+  id uuid,
   des text,
-  state text
+  state text,
+  FOREIGN KEY (id) REFERENCES userTable(id)
 );
+
+ CREATE TABLE userTable (
+  id uuid PRIMARY KEY,
+  email text UNIQUE,
+  password varchar
+ );
+
 
 insert into tasks(id, des, state) values(1, 'task 1', 'NEW');

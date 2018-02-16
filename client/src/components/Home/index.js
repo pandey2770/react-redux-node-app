@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { getTasks, createTask, deleteTask, updateTask } from '../../actions';
-import './styles.css';
 
 
 class Home extends Component {
