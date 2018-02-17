@@ -1,8 +1,30 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions';
 
 class Login extends Component {
+  state = {
+    username: '',
+    password: ''
+  };
+
+  change = event => {
+    this.setState({
+      [`${event.target.name}`]: event.target.value
+    });
+  };
+
+  login = () => {
+    const { loginUser, history } = this.props;
+    const { username, password } = this.state;
+    loginUser(username, password, history);
+  };
+
+
   render () {
+    const { history, location } = this.props;    
+    const { username ,password } = this.state;
     return (
         <div className="text-center">
           <div className="logo">login</div>
@@ -13,14 +35,14 @@ class Login extends Component {
                   <div className="login-group">
                     <div className="form-group">
                       <label for="lg_username" className="sr-only">Username</label>
-                      <input type="text" className="form-control" name="lg_username" placeholder="username" />
+                      <input type="text" className="form-control" name="username" placeholder="username" value={username}  onChange={this.change}/>
                     </div>
                     <div className="form-group">
                       <label for="lg_password" className="sr-only">Password</label>
-                      <input type="password" className="form-control" name="lg_password" placeholder="password" />
+                      <input type="password" className="form-control" name="password" placeholder="password" value={password}  onChange={this.change}/>
                     </div>
                   </div>
-                  <button type="submit" className="login-button">Login</button>
+                  <input type="button" value="login" onClick={this.login} className="login-button" />
                 </div>
                 <div className="etc-login-form">
                   <p>forgot your password?</p>
@@ -35,4 +57,12 @@ class Login extends Component {
   }
 }  
 
-export default Login;
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loginUser: (username, password, history) =>
+      dispatch(loginUser(username, password, history))
+  };
+}
+
+export default connect(undefined, mapDispatchToProps)(Login);

@@ -1,5 +1,34 @@
 import axios from 'axios';
 
+// login user
+export const loginUser = (username, password) => {
+  console.log(username,password)
+  return async function(dispatch) {
+    await axios.post('/api/login', { username, password });
+    return dispatch(loginUserDispatch({ email: username }));
+  };
+};
+
+export const loginUserDispatch = data => {
+  return {
+    type: 'LOGIN_USER',
+    data
+  };
+};
+
+// export const logoutUser = history => {
+//   return async function(dispatch) {
+//     await axios.get('/api/logout');
+//     return dispatch(logoutUserDispatch());
+//   };
+// };
+
+// export const logoutUserDispatch = () => {
+//   return {
+//     type: 'LOGOUT_USER'
+//   };
+// };
+
 // SignUp User
 
 export const signUp = (history, username, name,password) => {

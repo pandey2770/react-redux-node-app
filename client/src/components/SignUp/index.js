@@ -18,6 +18,7 @@ class SignUp extends Component {
     });
   };
 
+
   signUp = () => {
     const { username, name ,password, confirmPassword } = this.state;
     const { history } = this.props;
