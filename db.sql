@@ -12,11 +12,12 @@ CREATE TABLE tasks (
   id uuid,
   des text,
   state text,
-  FOREIGN KEY (id) REFERENCES userTable(id)
+  FOREIGN KEY (id) REFERENCES usertable(id)
 );
 
- CREATE TABLE userTable (
+ CREATE TABLE usertable (
   id uuid PRIMARY KEY,
+  name varchar,
   email text UNIQUE,
   password varchar
  );

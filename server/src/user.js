@@ -13,18 +13,18 @@ async function get(email) {
 
 async function getById(id) {
   const query = {
-    text: "SELECT * FROM demouser where id = $1",
+    text: "SELECT * FROM usertable where id = $1",
     values: [id]
   };
   return await DB.get(query);
 }
 
-async function signUp(email, password) {
+async function signUp(name, email, password) {
   const id = uuidv1();
   const pwd = await cryptPassword(password);
   const query = {
-    text: "INSERT INTO usertable (id, email, password) VALUES ($1, $2, $3)",
-    values: [id, email, password],  
+    text: "INSERT INTO usertable (id , name , email, password) VALUES ($1, $2, $3, $4)",
+    values: [id, name ,email, pwd],  
   };
   await DB.mutate(query);
   return id;

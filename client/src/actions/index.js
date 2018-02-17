@@ -1,5 +1,25 @@
 import axios from 'axios';
 
+// SignUp User
+
+export const signUp = (history, username, name,password) => {
+  return async function(dispatch) {
+    axios.post('/api/signUp', { username, name,password }).then(
+      () => {
+        return dispatch(getUserDispatch({ email: username }));
+      },
+    );
+  };
+};
+
+export const getUserDispatch = data => {
+  return {
+    type: 'LOGGEDIN_USER',
+    data
+  };
+};
+
+
 // Fetch tasks from backend
 export const getTasks = () => {
   return async function(dispatch) {
