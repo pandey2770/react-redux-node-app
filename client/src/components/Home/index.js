@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { getTasks, createTask, deleteTask, updateTask } from '../../actions';
+import Header from '../Header';
 
 
 class Home extends Component {
@@ -48,9 +49,11 @@ class Home extends Component {
     updateTask(id, 'NEW');
   }
   render() {
+    const { history, location } = this.props;        
     const { des } = this.state;
     return (
       <div>
+        <Header history={history} location={location} />
         <div className="centered">
           <textarea
             className="home-input" 

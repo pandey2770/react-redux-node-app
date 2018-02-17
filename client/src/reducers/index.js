@@ -1,5 +1,18 @@
 import { combineReducers } from 'redux';
 
+const userReducer = (state = { user: null }, action) => {
+  switch (action.type) {
+    case 'LOGIN_USER':
+      return { ...state, user: action.data };
+    case 'LOGGEDIN_USER':
+      return { ...state, user: action.data };
+    case 'LOGOUT_USER':
+      return { ...state, user: null };
+    default:
+      return state;
+  }
+};
+
 function task(state = [], action) {
   let index;
   switch (action.type) {
@@ -21,5 +34,6 @@ function task(state = [], action) {
 }
 
 export default combineReducers({
-  task
+  user: userReducer,
+  task: task
 });

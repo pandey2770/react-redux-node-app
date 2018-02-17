@@ -1,12 +1,56 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getUser, logoutUser } from '../../actions';
 
-const Header = () =>
-  <div className="header-wrapper">
-    <div className="header-menu">
-      <span className="header-link">
-        Task
-      </span>
-    </div>
-  </div>;
+class Header extends Component {
 
-export default Header;
+  componentWillMount() {
+    this.props.getUser();
+    console.log(this.props.history)
+    const { user, location: { pathname }, history } = this.props;
+    if ((pathname === '/' || pathname === '/SignUp') && user) {
+      history.push('/home');
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    const { user, location: { pathname }, history } = props;
+    if ((pathname === '/' || pathname === '/SignUp') && user) {
+      history.push('/home');
+    }
+  }
+
+  logoutUser = () => {
+    const { history, logoutUser } = this.props;
+    logoutUser(history);
+  }
+   render(){
+     const { user } = this.props;
+    return(
+        <div className="header-menu">
+          <span className="header-link">
+            Task
+          </span>
+          {!user
+          ?null
+          :
+          <span onClick={this.logoutUser}>LogOut</span>}
+        </div>
+    )
+  }
+}
+
+function mapStateToprpos(state) {
+  return {
+    user: state.user.user    
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getUser: () => dispatch(getUser()),
+    logoutUser: history => dispatch(logoutUser(history))    
+  };
+}
+
+export default connect(mapStateToprpos, mapDispatchToProps)(Header);

@@ -43,8 +43,8 @@
 }
 .home-input {
   font-size: medium;
-  resize: none;
-  font-family: 'Josefin Slab', serif;
+  height: 40px;
+  width: 100%;
 }
 .centered {
   position: fixed;
@@ -72,24 +72,17 @@
   top: 0px;
 }
 .header-menu {
-  display: flex;
-  width: 250px;
-  justify-content: space-between;
+  justify-content: center;
+  height: 50px;
+  padding: 5px;
+  text-align: center;
+  font-size: 35px;
+  background-color: #839dbb;
+  color: white;
 }
 .header-logo {
   height: 55px;
   margin-top: 5px;
-}
-.header-link {
-  background: transparent;
-  font-family: 'Josefin Slab', serif;
-  border: none;
-  color: white;
-  margin-top: 15px;
-  font-size: 35px;
-  outline: none;
-  cursor: pointer;
-  text-decoration: none;
 }
 .logo {
   font-size: 35px;

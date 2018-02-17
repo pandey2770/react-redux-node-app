@@ -1,11 +1,18 @@
 import axios from 'axios';
 
 // login user
-export const loginUser = (username, password) => {
-  console.log(username,password)
+
+export const loginUser = (username, password, history) => {
   return async function(dispatch) {
-    await axios.post('/api/login', { username, password });
-    return dispatch(loginUserDispatch({ email: username }));
+    const login = axios.post('/api/login', { username, password }).then(
+      ({ data }) => {
+        history.push('/home');
+        return dispatch(loginUserDispatch(data));
+      },
+      () => {
+        alert("Please don't force me enter the right Password or Email else ");
+      }
+    );
   };
 };
 
@@ -16,28 +23,39 @@ export const loginUserDispatch = data => {
   };
 };
 
-// export const logoutUser = history => {
-//   return async function(dispatch) {
-//     await axios.get('/api/logout');
-//     return dispatch(logoutUserDispatch());
-//   };
-// };
+// loginUser
 
-// export const logoutUserDispatch = () => {
-//   return {
-//     type: 'LOGOUT_USER'
-//   };
-// };
+export const getUser = () => {
+  return async function(dispatch) {
+    const { data } = await axios.get('/api/user');
+    return dispatch(getUserDispatch(data));
+  };
+};
+
+// logOutUser
+export const logoutUser = history => {
+  console.log(history);
+  return async function(dispatch) {
+    const logout = axios.get('/api/logout').then(({ data }) => {
+      history.push('/');
+      return dispatch(getLogoutDispatch(data));
+    });
+  };
+};
+
+export const getLogoutDispatch = () => {
+  return {
+    type: 'LOGOUT_USER'
+  };
+};
 
 // SignUp User
 
-export const signUp = (history, username, name,password) => {
+export const signUp = (history, username, name, password) => {
   return async function(dispatch) {
-    axios.post('/api/signUp', { username, name,password }).then(
-      () => {
-        return dispatch(getUserDispatch({ email: username }));
-      },
-    );
+    axios.post('/api/signUp', { username, name, password }).then(() => {
+      return dispatch(getUserDispatch({ email: username }));
+    });
   };
 };
 
@@ -47,7 +65,6 @@ export const getUserDispatch = data => {
     data
   };
 };
-
 
 // Fetch tasks from backend
 export const getTasks = () => {
@@ -83,7 +100,7 @@ export const createTask = task => {
 // Delete a task
 export const deleteTask = id => {
   return async function(dispatch) {
-    await axios.delete(`/api/tasks/${id}`);
+    await axios.delete('/api/tasks');
     return dispatch(deleteTaskDispatch(id));
   };
 };
@@ -97,7 +114,7 @@ export const deleteTaskDispatch = id => {
 
 export const updateTask = (id, state) => {
   return async function(dispatch) {
-    await axios.put(`/api/tasks/${id}`, { state });
+    await axios.put('/api/tasks', { state });
     return dispatch(updateTaskDispatch(id, state));
   };
 };
