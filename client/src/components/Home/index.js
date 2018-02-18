@@ -63,8 +63,9 @@ class Home extends Component {
           />
           <input 
             type="button"
-            value="Task"
+            value="Add Task"
             onClick={this.createTask}
+            className="tasks"
           />
         </div>
         <div className="centered1">
@@ -79,7 +80,7 @@ class Home extends Component {
               {task.state === 'NEW' ?
                 <button data-id={task.id} onClick={this.markAsDone}>d</button>:
                 <button data-id={task.id} onClick={this.markAsUndone}>ud</button>}
-              <span><Link to={`/Task/${task.id}`}>{task.des}</Link></span>
+              <span>{task.des}</span>
               <button data-id={task.id} onClick={this.deleteTask} className="button-come">X</button>
             </div>)}
         </div>

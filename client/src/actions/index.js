@@ -34,7 +34,6 @@ export const getUser = () => {
 
 // logOutUser
 export const logoutUser = history => {
-  console.log(history);
   return async function(dispatch) {
     const logout = axios.get('/api/logout').then(({ data }) => {
       history.push('/');

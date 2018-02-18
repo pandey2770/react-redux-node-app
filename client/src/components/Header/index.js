@@ -6,7 +6,6 @@ class Header extends Component {
 
   componentWillMount() {
     this.props.getUser();
-    console.log(this.props.history)
     const { user, location: { pathname }, history } = this.props;
     if ((pathname === '/' || pathname === '/SignUp') && user) {
       history.push('/home');
@@ -34,7 +33,7 @@ class Header extends Component {
           {!user
           ?null
           :
-          <span onClick={this.logoutUser}>LogOut</span>}
+          <span className="logout"onClick={this.logoutUser}>LogOut</span>}
         </div>
     )
   }
