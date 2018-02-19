@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const loginUser = (username, password, history) => {
   return async function(dispatch) {
-    const login = axios.post('/api/login', { username, password }).then(
+    axios.post('/api/login', { username, password }).then(
       ({ data }) => {
         history.push('/home');
         return dispatch(loginUserDispatch(data));
@@ -35,7 +35,7 @@ export const getUser = () => {
 // logOutUser
 export const logoutUser = history => {
   return async function(dispatch) {
-    const logout = axios.get('/api/logout').then(({ data }) => {
+    axios.get('/api/logout').then(({ data }) => {
       history.push('/');
       return dispatch(getLogoutDispatch(data));
     });
@@ -53,6 +53,7 @@ export const getLogoutDispatch = () => {
 export const signUp = (history, username, name, password) => {
   return async function(dispatch) {
     axios.post('/api/signUp', { username, name, password }).then(() => {
+      history.push('/home');
       return dispatch(getUserDispatch({ email: username }));
     });
   };
@@ -99,7 +100,7 @@ export const createTask = task => {
 // Delete a task
 export const deleteTask = id => {
   return async function(dispatch) {
-    await axios.delete('/api/tasks');
+    await axios.delete(`/api/tasksDelete/${id}`);
     return dispatch(deleteTaskDispatch(id));
   };
 };
@@ -113,7 +114,7 @@ export const deleteTaskDispatch = id => {
 
 export const updateTask = (id, state) => {
   return async function(dispatch) {
-    await axios.put('/api/tasks', { state });
+    await axios.put(`/api/tasks/${id}`, { state });
     return dispatch(updateTaskDispatch(id, state));
   };
 };

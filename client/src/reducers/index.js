@@ -21,11 +21,11 @@ function task(state = [], action) {
     case 'CREATE_TASK':
       return [...state, action.task];
     case 'REMOVE_TASK':
-      index = state.findIndex(task => task.id === action.id);
+      index = state.findIndex(task => task.des === action.id);
       state.splice(index, 1);
       return [...state];
     case 'UPDATE_TASK':
-      index = state.findIndex(task => task.id === action.id);
+      index = state.findIndex(task => task.des ===  action.id);
       state[index] = { ...state[index], state: action.state };
       return [...state];
     default:

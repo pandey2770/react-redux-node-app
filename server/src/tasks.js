@@ -9,11 +9,12 @@ async function getAllTasks(id) {
   const task = await DB.get(query);
   return task;
  }
-async function deleteTask(id) {
+async function deleteTask(id, des) {
   const query = {
-    text: "DELETE FROM tasks WHERE id = $1",
-    values: [ id ],
+    text: "DELETE FROM tasks WHERE id = $1 and des = $2",
+    values: [ id, des ],
   };
+  
   return await DB.mutate(query);
 }
 
@@ -25,19 +26,11 @@ async function createTask(id,task) {
   await DB.mutate(query);
   return id;
 }
-// async function deleteFromCatr (id, userid  ) {
-//   const state='addCart';
-//   const query = {
-//     text : "DELETE FROM cart WHERE id=$1 and productid=$2 and state=$3 ",
-//     values: [ id, userid, state ]
-//   }
-//   const data = await DB.mutate(query);
-//   return data;
-// }
-async function updateTask(id, state) {
+
+async function updateTask(id, des ,state) {
   const query = {
-    text: "UPDATE tasks SET state = $1 WHERE id = $2",
-    values: [ state, id ],
+    text: "UPDATE tasks SET state = $3 WHERE id = $1 and des= $2 ",
+    values: [ id, des, state ],
   };
   return await DB.mutate(query);
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 import { getTasks, createTask, deleteTask, updateTask } from '../../actions';
 import Header from '../Header';
 
@@ -69,19 +68,19 @@ class Home extends Component {
           />
         </div>
         <div className="centered1">
-          {this.props.task.map(task =>
+          {this.props.task.map((task, id) =>
             <div
               className={classNames('task', {
                 'task_new': task.state === 'NEW',
                 'task_done': task.state === 'DONE',
               })}
-              key={task.id}
+              key={id}
             >
               {task.state === 'NEW' ?
-                <button data-id={task.id} onClick={this.markAsDone}>d</button>:
-                <button data-id={task.id} onClick={this.markAsUndone}>ud</button>}
+                <button data-id={task.des} onClick={this.markAsDone}>d</button>:
+                <button data-id={task.des} onClick={this.markAsUndone}>ud</button>}
               <span>{task.des}</span>
-              <button data-id={task.id} onClick={this.deleteTask} className="button-come">X</button>
+              <button data-id={task.des} onClick={this.deleteTask} className="button-come">X</button>
             </div>)}
         </div>
       </div>
@@ -90,7 +89,8 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  task: state.task
+  task: state.task,
+  user: state.user.user  
 });
   
 const mapDispatchToProps = (dispatch) => {

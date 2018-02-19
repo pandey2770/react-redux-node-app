@@ -27,13 +27,15 @@ class Header extends Component {
      const { user } = this.props;
     return(
         <div className="header-menu">
-          <span className="header-link">
+          {!user
+          ?<span className="header-link">
             Task
           </span>
-          {!user
-          ?null
-          :
-          <span className="logout"onClick={this.logoutUser}>LogOut</span>}
+          :<div>
+          <span className="header-link">
+            {user.name} Task's
+          </span>
+          <span className="logout"onClick={this.logoutUser}>LogOut</span></div>}
         </div>
     )
   }
