@@ -22,10 +22,14 @@ class Home extends Component {
   createTask = () => {
     const { createTask } = this.props;
     const { des } = this.state;
-    createTask({ des, state:'NEW' });
-    this.setState({
-      des: '',
-    });
+    if(des === undefined||null){
+      return alert("Write Task")
+    }else{
+      createTask({ des, state:'NEW' });
+      this.setState({
+        des: '',
+      });
+    }
   };
 
   deleteTask =(event)=>{
@@ -53,6 +57,20 @@ class Home extends Component {
     return (
       <div>
         <Header history={history} location={location} />
+        <div className='guide'>
+          <h2>User guide</h2>
+          <ul>
+            <li>
+              For add write task  and press add task button
+            </li>
+            <li>
+              Tap the task for mark as done or mask as undone
+            </li>
+            <li>
+              For deleting the task press the X button right side of the task
+            </li>
+          </ul>
+        </div>
         <div className="centered">
           <textarea
             className="home-input" 
@@ -77,10 +95,13 @@ class Home extends Component {
               key={id}
             >
               {task.state === 'NEW' ?
-                <button data-id={task.des} onClick={this.markAsDone}>d</button>:
-                <button data-id={task.des} onClick={this.markAsUndone}>ud</button>}
-              <span>{task.des}</span>
+              <div data-id={task.des} onClick={this.markAsDone}>{task.des} 
+                <button data-id={task.des} onClick={this.deleteTask} className="button-come">X</button></div>:
+              <div className='taskDiv' data-id={task.des} onClick={this.markAsUndone}>{task.des} 
               <button data-id={task.des} onClick={this.deleteTask} className="button-come">X</button>
+              </div>
+                }
+              
             </div>)}
         </div>
       </div>

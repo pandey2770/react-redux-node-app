@@ -62,6 +62,9 @@
   margin-top: -50px;
   margin-left: -100px;
 }
+.guide {
+  margin:75px;
+}
 .header-wrapper {
   background-color: #44a1d6;
   opacity: 0.7;
@@ -76,6 +79,10 @@
   float: right;
   margin-right: 5px;
   cursor: pointer;
+}
+.taskDiv {
+  height: 100%;
+  width: 100%
 }
 .header-menu {
   justify-content: center;
