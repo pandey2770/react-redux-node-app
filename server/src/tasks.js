@@ -14,7 +14,6 @@ async function deleteTask(id, des) {
     text: "DELETE FROM tasks WHERE id = $1 and des = $2",
     values: [ id, des ],
   };
-  
   return await DB.mutate(query);
 }
 

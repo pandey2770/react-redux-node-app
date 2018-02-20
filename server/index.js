@@ -69,8 +69,8 @@ var app = express();
     res.json(taskId);
   });
 
-  app.put('/api/tasks/:id', async (req, res) => {
-    await tasks.updateTask(req.user.id, req.params.id,req.body.state);
+  app.put('/api/tasks', async (req, res) => {
+    await tasks.updateTask(req.user.id, req.body.id,req.body.state);
     res.json({ id: req.user.id });
   });
 
