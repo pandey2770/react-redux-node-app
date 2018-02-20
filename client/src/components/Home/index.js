@@ -67,7 +67,7 @@ class Home extends Component {
               Tap the task for mark as done or mask as undone
             </li>
             <li>
-              For deleting the task press the X button right side of the task
+              For deleting the task press the <span className="button-close">X</span> button right side of the task
             </li>
           </ul>
         </div>
@@ -109,12 +109,15 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  task: state.task,
-  user: state.user.user  
-});
-  
-const mapDispatchToProps = (dispatch) => {
+
+function mapStateToProps(state) {
+  return {
+    user: state.user.user,
+    task: state.task,
+  };
+} 
+
+function mapDispatchToProps  (dispatch){
   return {
     getTasks: () => dispatch(getTasks()),
     createTask: (task) => dispatch(createTask(task)),

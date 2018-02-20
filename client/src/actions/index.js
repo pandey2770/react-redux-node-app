@@ -6,7 +6,7 @@ export const loginUser = (username, password, history) => {
   return async function(dispatch) {
     axios.post('/api/login', { username, password }).then(
       ({ data }) => {
-        history.push('/home');
+        history.push('/');
         return dispatch(loginUserDispatch(data));
       },
       () => {
@@ -36,7 +36,7 @@ export const getUser = () => {
 export const logoutUser = history => {
   return async function(dispatch) {
     axios.get('/api/logout').then(({ data }) => {
-      history.push('/');
+      history.push('/login');
       return dispatch(getLogoutDispatch(data));
     });
   };
@@ -114,7 +114,7 @@ export const deleteTaskDispatch = id => {
 
 export const updateTask = (id, state) => {
   return async function(dispatch) {
-    await axios.put(`/api/tasks/${id}`, { state });
+    await axios.put('/api/tasks', {id, state });
     return dispatch(updateTaskDispatch(id, state));
   };
 };

@@ -26,13 +26,15 @@
   width: 30%;
 }
 .task_new {
-  background: antiquewhite;
+  background: #839dbb;
   margin-top: 5px;
+  color: white;  
 }
 .task_done {
-  background-color: antiquewhite;
+  background-color: #839dbb;
   opacity: .5;
   color: white;
+  margin-top: 5px;  
   text-decoration: line-through;
 }
 .button-come {
@@ -41,10 +43,16 @@
   border-radius: 50%;
   float: right;
 }
+.button-close {
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+}
 .home-input {
   font-size: medium;
   height: 40px;
   width: 100%;
+  border-color: #839dbb;
 }
 .centered {
   position: fixed;
@@ -58,12 +66,13 @@
   width: 100%;
   position: fixed;
   top: 55%;
-  left: 50%;
+  left: 42%;
   margin-top: -50px;
   margin-left: -100px;
 }
 .guide {
   margin:75px;
+  min-width: 300px;
 }
 .header-wrapper {
   background-color: #44a1d6;
@@ -92,6 +101,7 @@
   font-size: 35px;
   background-color: #839dbb;
   color: white;
+  min-width: 300px;  
 }
 .header-logo {
   height: 55px;
@@ -103,7 +113,6 @@
 }
 .tasks {
   margin-left: 15px;
-  background: transparent;
-  border: none;
+  border-color: #839dbb;
   width: 100px;
 }
