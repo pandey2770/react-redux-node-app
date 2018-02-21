@@ -13,6 +13,7 @@ class SignUp extends Component {
     confirmPassword: ''
   };
 
+
   change = event => {
     this.setState({
       [`${event.target.name}`]: event.target.value
@@ -52,7 +53,7 @@ class SignUp extends Component {
                   </div>
                   <div className="form-group">
                     <label for="lg_username" className="sr-only">Username</label>
-                    <input type="text" className="form-control" name="username" placeholder="Email" value={username}  onChange={this.change}/>
+                    <input type="text" className="form-control" name="username" placeholder="User Name" value={username}  onChange={this.change}/>
                   </div>
                   <div className="form-group">
                     <label for="lg_password" className="sr-only">Password</label>
@@ -66,7 +67,7 @@ class SignUp extends Component {
                   <input type="button" value="SignUp" onClick={this.signUp} className="login-button" />
               </div>
               <div className="etc-login-form">
-                <Link to="/">
+                <Link to="/login">
                   <p>Already user? </p>
                 </Link> 
               </div>

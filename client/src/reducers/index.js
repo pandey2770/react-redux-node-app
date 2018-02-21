@@ -8,10 +8,20 @@ const userReducer = (state = { user: null }, action) => {
       return { ...state, user: action.data };
     case 'LOGOUT_USER':
       return { ...state, user: null };
+    // case 'ERROR':
+    //   return [ ...state, [action.data] ];    
     default:
       return state;
   }
 };
+// const error = (state = [], action) => {
+//   switch (action.type) {
+//     case 'ERROR':
+//       return [ ...state, [action.data] ];
+//     default:
+//       return state;
+//   }
+// };
 
 function task(state = [], action) {
   let index;
@@ -35,5 +45,6 @@ function task(state = [], action) {
 
 export default combineReducers({
   user: userReducer,
-  task: task
+  task: task,
+  // error:error
 });

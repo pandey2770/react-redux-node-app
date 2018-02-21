@@ -55,6 +55,9 @@ export const signUp = (history, username, name, password) => {
     axios.post('/api/signUp', { username, name, password }).then(() => {
       history.push('/home');
       return dispatch(getUserDispatch({ email: username }));
+    },
+    response => {
+      return dispatch(alert('class'));
     });
   };
 };
@@ -66,6 +69,12 @@ export const getUserDispatch = data => {
   };
 };
 
+export const alert = data => {
+  return {
+    type: 'ERROR',
+    data
+  };
+};
 // Fetch tasks from backend
 export const getTasks = () => {
   return async function(dispatch) {
