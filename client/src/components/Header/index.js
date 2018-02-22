@@ -7,14 +7,14 @@ class Header extends Component {
   componentWillMount() {
     this.props.getUser();
     const { user, location: { pathname }, history } = this.props;
-    if ((pathname === '/' || pathname === '/SignUp') && user) {
+    if ((pathname === '/logn' || pathname === '/SignUp') && user) {
       history.push('/home');
     }
   }
 
   componentWillReceiveProps(props) {
     const { user, location: { pathname }, history } = props;
-    if ((pathname === '/' || pathname === '/SignUp') && user) {
+    if ((pathname === '/login' || pathname === '/SignUp') && user) {
       history.push('/home');
     }
   }

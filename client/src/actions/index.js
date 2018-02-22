@@ -6,7 +6,7 @@ export const loginUser = (username, password, history) => {
   return async function(dispatch) {
     axios.post('/api/login', { username, password }).then(
       ({ data }) => {
-        history.push('/');
+        history.push('/home');
         return dispatch(loginUserDispatch(data));
       },
       () => {

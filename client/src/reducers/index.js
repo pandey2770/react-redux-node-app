@@ -14,15 +14,7 @@ const userReducer = (state = { user: null }, action) => {
       return state;
   }
 };
-// const error = (state = [], action) => {
-//   switch (action.type) {
-//     case 'ERROR':
-//       return [ ...state, [action.data] ];
-//     default:
-//       return state;
-//   }
-// };
-
+ 
 function task(state = [], action) {
   let index;
   switch (action.type) {
