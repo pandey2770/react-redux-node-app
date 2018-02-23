@@ -52,15 +52,12 @@ class SignUp extends Component {
                     <input type="text" className="form-control" name="name" placeholder="name" value={name}  onChange={this.change}/>
                   </div>
                   <div className="form-group">
-                    <label for="lg_username" className="sr-only">Username</label>
                     <input type="text" className="form-control" name="username" placeholder="User Name" value={username}  onChange={this.change}/>
                   </div>
                   <div className="form-group">
-                    <label for="lg_password" className="sr-only">Password</label>
                     <input type="password" className="form-control" name="password" placeholder="password" value={password} onChange={this.change}/>
                   </div>
                   <div className="form-group">
-                    <label for="lg_password" className="sr-only">Confirm Password</label>
                     <input type="password" className="form-control" name="confirmPassword" placeholder="Confirm Password" value={confirmPassword} onChange={this.change}/>
                   </div>
                 </div>

@@ -6,7 +6,7 @@ export const loginUser = (username, password, history) => {
   return async function(dispatch) {
     axios.post('/api/login', { username, password }).then(
       ({ data }) => {
-        history.push('/home');
+        history.push('/');
         return dispatch(loginUserDispatch(data));
       },
       () => {
@@ -53,7 +53,7 @@ export const getLogoutDispatch = () => {
 export const signUp = (history, username, name, password) => {
   return async function(dispatch) {
     axios.post('/api/signUp', { username, name, password }).then(() => {
-      history.push('/home');
+      history.push('/');
       return dispatch(getUserDispatch({ email: username }));
     },
     response => {
