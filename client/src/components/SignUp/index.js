@@ -48,7 +48,6 @@ class SignUp extends Component {
               <div className="main-login-form">
                 <div className="login-group">
                   <div className="form-group">
-                    <label for="lg_username" className="sr-only">Name</label>
                     <input type="text" className="form-control" name="name" placeholder="name" value={name}  onChange={this.change}/>
                   </div>
                   <div className="form-group">

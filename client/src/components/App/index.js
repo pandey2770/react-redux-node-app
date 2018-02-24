@@ -34,12 +34,6 @@ function mapDispatchToProps(dispatch) {
 const NewApp = connect(mapStateToProps, mapDispatchToProps)(App);
 
 class Raper extends Component {
-
-  componentDidUpdate(prevProps, prevState) {
-    const {user} = this.props;
-    console.log(user)  
-  }
-
   render() {
     const {user} =this.props;
     return (
@@ -48,14 +42,13 @@ class Raper extends Component {
         <Switch>
           <Route path="/signUp" component={SignUp} />
           <Route path="/login" component={Login} />
-          <Route path="/" component={Home} />
-          {/* <Route exact path="/" render={() => (
+          <Route exact path="/" render={() => (
             user ? (
               <Route path="/" component={Home} />
             ) : (
               <Redirect to="/login"/>
           )
-        )}/> */}
+        )}/>
         </Switch>
       </div>
     )
