@@ -42,13 +42,14 @@ class Raper extends Component {
         <Switch>
           <Route path="/signUp" component={SignUp} />
           <Route path="/login" component={Login} />
-          <Route exact path="/" render={() => (
+          <Route path="/" component={Home} />
+          {/* <Route exact path="/" render={() => (
             user ? (
               <Route path="/" component={Home} />
             ) : (
               <Redirect to="/login"/>
           )
-        )}/>
+        )}/> */}
         </Switch>
       </div>
     )

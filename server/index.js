@@ -28,7 +28,8 @@ var app = express();
         res.sendStatus(200);
       });
     } catch(exp) {
-      if (exp.constraint === 'demouser_email_key') {
+      console.log(exp.constraint)
+      if (exp.constraint === 'usertable_email_key') {
         res.status(400).jsonp({ error: 'Email is already registered.'});
       } else {
         res.sendStatus(500);

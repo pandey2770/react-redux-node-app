@@ -7,9 +7,7 @@ const userReducer = (state = { user: null }, action) => {
     case 'LOGGEDIN_USER':
       return { ...state, user: action.data };
     case 'LOGOUT_USER':
-      return { ...state, user: null };
-    // case 'ERROR':
-    //   return [ ...state, [action.data] ];    
+      return { ...state, user: null };  
     default:
       return state;
   }
@@ -35,8 +33,17 @@ function task(state = [], action) {
   }
 }
 
+const error = (state ={ }, action) => {
+  switch (action.type) {
+    case 'ERROR':
+    return [ ...state, action.data ]; 
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
+  error:error,  
   user: userReducer,
   task: task,
-  // error:error
 });

@@ -10,7 +10,8 @@ export const loginUser = (username, password, history) => {
         return dispatch(loginUserDispatch(data));
       },
       () => {
-        alert("Please don't force me enter the right Password or Email else ");
+        console.log()
+        return dispatch(alert('className'));
       }
     );
   };
@@ -57,7 +58,9 @@ export const signUp = (history, username, name, password) => {
       return dispatch(getUserDispatch({ email: username }));
     },
     response => {
-      return dispatch(alert('class'));
+      if (response == 'Error: Request failed with status code 400'){
+        return dispatch(alert('className'));        
+      }
     });
   };
 };

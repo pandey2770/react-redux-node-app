@@ -7,8 +7,20 @@ import Header from '../Header';
 class Login extends Component {
   state = {
     username: '',
-    password: ''
+    password: '',
+    error:'form-control'
   };
+
+
+  componentWillReceiveProps(nextProps){
+    const {error} = nextProps;
+    if(error[0]==='className'){
+      console.log(error[0])
+      this.setState({
+        error: error[0]
+      });
+    }
+  }
 
   change = event => {
     this.setState({
@@ -25,7 +37,7 @@ class Login extends Component {
 
   render () {
     const { history, location } = this.props;    
-    const { username ,password } = this.state;
+    const { username ,password, error } = this.state;
     return (
       <div>
         <Header history={history} location={location} />
@@ -37,16 +49,31 @@ class Login extends Component {
             <div className="main-login-form">
               <div className="login-group">
                 <div className="form-group">
-                  <input type="text" className="form-control" name="username" placeholder="username" value={username}  onChange={this.change}/>
+                  <input 
+                  type="text" 
+                  className={error} 
+                  name="username" 
+                  placeholder="username" 
+                  value={username}  
+                  onChange={this.change}/>
                 </div>
                 <div className="form-group">
-                  <input type="password" className="form-control" name="password" placeholder="password" value={password}  onChange={this.change}/>
+                  <input 
+                  type="password" 
+                  className={error} 
+                  name="password" 
+                  placeholder="password" 
+                  value={password}  
+                  onChange={this.change}/>
                 </div>
+                {error !=='className'?
+            null
+            :
+            <span>UserNmae or Password is Incorrect</span>}
               </div>
                 <input type="button" value="login" onClick={this.login} className="login-button" />
             </div>
             <div className="etc-login-form">
-              <p>forgot your password?</p>
               <Link to="/signUp">
               <p>new user? </p>
               </Link> 
@@ -59,7 +86,9 @@ class Login extends Component {
 }  
 
 function mapStateToprpos(state) {
+  console.log(state)
   return {
+    error:state.error,
   };
 }
 

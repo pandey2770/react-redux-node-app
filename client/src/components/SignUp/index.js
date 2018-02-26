@@ -10,7 +10,7 @@ class SignUp extends Component {
     username: '',
     name:'',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   };
 
 
@@ -37,7 +37,8 @@ class SignUp extends Component {
 
 
   render () {
-    const { username, name ,password, confirmPassword } = this.state;    
+    const { username, name ,password, confirmPassword, className } = this.state;    
+    console.log(className)
     const { history, location } = this.props;    
     return (
       <div>
@@ -48,19 +49,47 @@ class SignUp extends Component {
               <div className="main-login-form">
                 <div className="login-group">
                   <div className="form-group">
-                    <input type="text" className="form-control" name="name" placeholder="name" value={name}  onChange={this.change}/>
+                    <input 
+                    type="text" 
+                    className="form-control" 
+                    name="name" 
+                    placeholder="name" 
+                    value={name}  
+                    onChange={this.change}/>
                   </div>
                   <div className="form-group">
-                    <input type="text" className="form-control" name="username" placeholder="User Name" value={username}  onChange={this.change}/>
+                    <input 
+                    type="text" 
+                    className="form-control"
+                    name="username" 
+                    placeholder="User Name" 
+                    value={username}  
+                    onChange={this.change}/>
                   </div>
                   <div className="form-group">
-                    <input type="password" className="form-control" name="password" placeholder="password" value={password} onChange={this.change}/>
+                    <input 
+                    type="password" 
+                    className="form-control" 
+                    name="password" 
+                    placeholder="password" 
+                    value={password} 
+                    onChange={this.change}/>
                   </div>
                   <div className="form-group">
-                    <input type="password" className="form-control" name="confirmPassword" placeholder="Confirm Password" value={confirmPassword} onChange={this.change}/>
+                    <input 
+                    type="password" 
+                    className="form-control" 
+                    name="confirmPassword" 
+                    placeholder="Confirm Password" 
+                    value={confirmPassword} 
+                    onChange={this.change}/>
                   </div>
                 </div>
-                  <input type="button" value="SignUp" onClick={this.signUp} className="login-button" />
+                  <input 
+                  type="button" 
+                  value="SignUp" 
+                  onClick={this.signUp} 
+                  className="login-button" />
               </div>
               <div className="etc-login-form">
                 <Link to="/login">
