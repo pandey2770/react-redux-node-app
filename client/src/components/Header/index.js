@@ -5,17 +5,24 @@ import { getUser, logoutUser } from '../../actions';
 class Header extends Component {
 
   componentWillMount() {
+    console.log(pathname)
     this.props.getUser();
     const { user, location: { pathname }, history } = this.props;
     if ((pathname === '/logn' || pathname === '/SignUp') && user) {
-      history.push('/home');
+      history.push('/');
+    }
+    if (((pathname === '/' && !user))){
+      history.push('/login');
     }
   }
 
   componentWillReceiveProps(props) {
     const { user, location: { pathname }, history } = props;
     if ((pathname === '/login' || pathname === '/SignUp') && user) {
-      history.push('/home');
+      history.push('/');
+    }
+    if (((pathname === '/' && !user))){
+      history.push('/login');
     }
   }
 

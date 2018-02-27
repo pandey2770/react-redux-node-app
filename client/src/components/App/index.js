@@ -9,49 +9,14 @@ import './styles.css';
 import { getUser } from '../../actions';
 
 class App extends Component {
-   
-  componentWillMount() {
-    this.props.getUser();
-  }
-
   render() {
-    return null;
-  }
-}
-
-
-function mapStateToProps(state) {
-  return {
-    user: state.user.user    
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    getUser: () => dispatch(getUser()),
-  };
-}
-
-const NewApp = connect(mapStateToProps, mapDispatchToProps)(App);
-
-class Raper extends Component {
-  render() {
-    const {user} =this.props;
     return (
       <div className="app-wrapper check">
-        <NewApp />
         <Switch>
           <Route path="/signUp" component={SignUp} />
           <Route path="/login" component={Login} />
-          <Route path="/" component={Home} />
-          {/* <Route exact path="/" render={() => (
-            user ? (
-              <Route path="/" component={Home} />
-            ) : (
-              <Redirect to="/login"/>
-          )
-        )}/> */}
-        </Switch>
+          <Route exact path="/" component={Home} />
+          </Switch>
         <Forget />
       </div>
     )
@@ -59,4 +24,4 @@ class Raper extends Component {
 }
 
 
-export default Raper;
+export default App;
