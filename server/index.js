@@ -6,6 +6,8 @@ var express = require('express');
 var app = express();
 var tasks = require('./src/tasks');
 var bodyParser = require('body-parser');
+var nodemailer = require('nodemailer');
+
 
 var app = express();
   app.use(express.static("public"));
@@ -74,5 +76,9 @@ var app = express();
     await tasks.updateTask(req.user.id, req.body.id,req.body.state);
     res.json({ id: req.user.id });
   });
+
+  app.post('/api/forget' , async (req,res) =>{
+    console.log(req.body)
+  })
 
   app.listen(3001, () => console.log("Server started on port 3001"));

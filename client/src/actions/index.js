@@ -24,6 +24,19 @@ export const loginUserDispatch = data => {
   };
 };
 
+export const show = () => {
+  return {
+    type:'FORGET'
+  }
+}
+
+export const close = () => {
+  return {
+    type:'CLOSE'
+  }
+}
+
+
 // loginUser
 
 export const getUser = () => {
@@ -58,9 +71,8 @@ export const signUp = (history, username, name, password) => {
       return dispatch(getUserDispatch({ email: username }));
     },
     response => {
-      if (response == 'Error: Request failed with status code 400'){
-        return dispatch(alert('className'));        
-      }
+      console.log(response)
+      return dispatch(alert('className'));
     });
   };
 };
@@ -138,3 +150,10 @@ export const updateTaskDispatch = (id, state) => {
     state
   };
 };
+
+export const send = email => {
+  return async function(dispatch) {
+    await axios.post('/api/forget' , {email});
+    return dispatch(close());
+  }
+}

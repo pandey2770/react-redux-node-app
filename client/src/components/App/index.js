@@ -4,6 +4,7 @@ import Home from '../Home';
 import Login from '../Login';
 import { connect } from 'react-redux';
 import SignUp from '../SignUp';
+import Forget from '../Forget';
 import './styles.css';
 import { getUser } from '../../actions';
 
@@ -37,7 +38,7 @@ class Raper extends Component {
   render() {
     const {user} =this.props;
     return (
-      <div className="app-wrapper">
+      <div className="app-wrapper check">
         <NewApp />
         <Switch>
           <Route path="/signUp" component={SignUp} />
@@ -51,6 +52,7 @@ class Raper extends Component {
           )
         )}/> */}
         </Switch>
+        <Forget />
       </div>
     )
   }

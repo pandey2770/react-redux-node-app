@@ -42,8 +42,20 @@ const error = (state ={ }, action) => {
   }
 };
 
+const popUp = ( state = { showForget: false },action) => {
+  switch (action.type) {
+    case 'FORGET':
+      return { ...state, showForget: true };
+    case 'CLOSE':
+      return { ...state, showForget: false };
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   error:error,  
   user: userReducer,
   task: task,
+  popUp:popUp
 });

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginUser } from '../../actions';
+import { loginUser, show } from '../../actions';
 import Header from '../Header';
 
 class Login extends Component {
@@ -34,7 +34,9 @@ class Login extends Component {
     loginUser(username, password, history);
   };
 
-
+  show = () => {
+    this.props.show()
+  }
   render () {
     const { history, location } = this.props;    
     const { username ,password, error } = this.state;
@@ -74,8 +76,9 @@ class Login extends Component {
                 <input type="button" value="login" onClick={this.login} className="login-button" />
             </div>
             <div className="etc-login-form">
+                <p onClick={this.show} className='forget'>Froget Password</p>
               <Link to="/signUp">
-              <p>new user? </p>
+                <p>new user? </p>
               </Link> 
             </div>
           </div>
@@ -86,7 +89,6 @@ class Login extends Component {
 }  
 
 function mapStateToprpos(state) {
-  console.log(state)
   return {
     error:state.error,
   };
@@ -95,7 +97,8 @@ function mapStateToprpos(state) {
 function mapDispatchToProps(dispatch) {
   return {
     loginUser: (username, password, history) =>
-      dispatch(loginUser(username, password, history))
+      dispatch(loginUser(username, password, history)),
+      show: () => dispatch(show())
   };
 }
 
