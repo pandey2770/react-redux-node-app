@@ -10,7 +10,6 @@ export const loginUser = (username, password, history) => {
         return dispatch(loginUserDispatch(data));
       },
       () => {
-        console.log()
         return dispatch(alert('className'));
       }
     );
@@ -71,7 +70,6 @@ export const signUp = (history, username, name, password) => {
       return dispatch(getUserDispatch({ email: username }));
     },
     response => {
-      console.log(response)
       return dispatch(alert('className'));
     });
   };

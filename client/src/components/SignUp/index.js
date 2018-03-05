@@ -37,8 +37,7 @@ class SignUp extends Component {
 
 
   render () {
-    const { username, name ,password, confirmPassword, className } = this.state;    
-    console.log(className)
+    const { username, name ,password, confirmPassword } = this.state;    
     const { history, location } = this.props;    
     return (
       <div>

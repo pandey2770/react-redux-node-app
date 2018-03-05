@@ -15,7 +15,6 @@ class Login extends Component {
   componentWillReceiveProps(nextProps){
     const {error} = nextProps;
     if(error[0]==='className'){
-      console.log(error[0])
       this.setState({
         error: error[0]
       });

@@ -4,7 +4,8 @@ import { close, send } from '../../actions';
 
 class Forget extends Component {
   state = {
-    email: ''
+    email: '',
+    span:''
   };
 
   componentDidMount() {
@@ -21,15 +22,29 @@ class Forget extends Component {
 
   close = () => {
     this.props.close();
+    this.setState({
+      span:''
+    })
   }
 
   send = () => {
-    const { email} = this.state;
-    this.props.send(email);
+    const { email, span } = this.state;
+    const { number } = Math.floor(Math.random() * 10000);    
+    if(span===''){
+      this.setState({
+        span:'span'
+      })
+    }
+    else{
+      this.props.send(email);
+      this.setState({
+        span:''
+      })  
+    }
   }
 
   render() {
-    const { email} = this.state;
+    const { email, span } = this.state;
     if (!this.props.popUp) {
       return null;
     }
@@ -56,6 +71,11 @@ class Forget extends Component {
                 placeholder="Enter email"
               />
             </div>
+            {span=== 'span'?
+              <span>Please enter your Email</span>
+              :
+              null              
+              }
             <div className="button-style">
               <input
                 type="button"
