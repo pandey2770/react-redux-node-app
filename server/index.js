@@ -1,12 +1,12 @@
 var passport = require('passport');
 var cookieParser = require('cookie-parser')
 var session = require("express-session");
-var User = require('./src/user');
 var express = require('express');
+var nodemailer = require('nodemailer');
 var app = express();
+var User = require('./src/user');
 var tasks = require('./src/tasks');
 var bodyParser = require('body-parser');
-var nodemailer = require('nodemailer');
 
 
 var app = express();
@@ -76,8 +76,33 @@ var app = express();
     res.json({ id: req.user.id });
   });
 
-  app.post('/api/forget' , async (req,res) =>{
-    console.log(req.body)
+  app.get('/api/forget/:email' , async (req,res) => {
+    const number = Math.floor(100000+Math.random()*900000);
+    const data = await User.get(req.params.email);
+    let transporter = nodemailer.createTransport({
+      service: 'gmail', 
+            auth: {
+              user: 'pandey.abhishek2770@gmail.com', 
+              pass: ''
+          },
+            tls:{
+              rejectUnauthorized:false
+            }
+        });
+    
+        let mailOptions = {
+            from: 'Tasks',
+            to: req.params.email,
+            subject: 'test',
+            text: `test ${number}`
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return console.log(error);
+            }
+            console.log('Message sent: %s', info.messageId);
+            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+        });
   })
 
   app.listen(3001, () => console.log("Server started on port 3001"));

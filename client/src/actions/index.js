@@ -151,7 +151,7 @@ export const updateTaskDispatch = (id, state) => {
 
 export const send = email => {
   return async function(dispatch) {
-    await axios.post('/api/forget' , {email});
+    await axios.get(`/api/forget/${email}`);
     return dispatch(close());
   }
 }
