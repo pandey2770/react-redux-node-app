@@ -77,32 +77,37 @@ var app = express();
   });
 
   app.get('/api/forget/:email' , async (req,res) => {
-    const number = Math.floor(100000+Math.random()*900000);
+    const number = Math.floor(Math.random() * 1000000);
     const data = await User.get(req.params.email);
-    let transporter = nodemailer.createTransport({
-      service: 'gmail', 
-            auth: {
-              user: 'pandey.abhishek2770@gmail.com', 
-              pass: ''
-          },
-            tls:{
-              rejectUnauthorized:false
-            }
-        });
-    
-        let mailOptions = {
-            from: 'Tasks',
-            to: req.params.email,
-            subject: 'test',
-            text: `test ${number}`
-        };
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                return console.log(error);
-            }
-            console.log('Message sent: %s', info.messageId);
-            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-        });
+    if( data.length >0 ){
+      res.json(data)
+      let transporter = nodemailer.createTransport({
+        service: 'gmail', 
+              auth: {
+                user: 'pandey.abhishek2770@gmail.com', 
+                pass: 'Godfather.'
+            },
+              tls:{
+                rejectUnauthorized:false
+              }
+          });
+      
+          let mailOptions = {
+              from: 'Tasks',
+              to: req.params.email,
+              subject: 'test',
+              text: `test ${number}`
+          };
+          transporter.sendMail(mailOptions, (error, info) => {
+              if (error) {
+                  return console.log(error);
+              }
+              console.log('Message sent: %s', info.messageId);
+              console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+      });
+    } else {
+        res.json('error')
+      }
   })
 
   app.listen(3001, () => console.log("Server started on port 3001"));

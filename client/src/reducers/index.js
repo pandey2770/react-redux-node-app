@@ -17,7 +17,7 @@ function task(state = [], action) {
   let index;
   switch (action.type) {
     case 'ADD_ALL_TASK':
-      return [...state, ...action.tasks];
+      return [...action.tasks];
     case 'CREATE_TASK':
       return [...state, action.task];
     case 'REMOVE_TASK':
@@ -37,17 +37,23 @@ const error = (state ={ }, action) => {
   switch (action.type) {
     case 'ERROR':
     return [ ...state, action.data ]; 
+    case 'NOT':
+      return [...state, action.data];
+    case 'RESET':
+      return [...state, action.data];
     default:
       return state;
   }
 };
 
-const popUp = ( state = { showForget: false },action) => {
+const popUp = ( state = { showForget: false, showReset:false },action) => {
   switch (action.type) {
     case 'FORGET':
       return { ...state, showForget: true };
     case 'CLOSE':
       return { ...state, showForget: false };
+    case 'RESET':
+      return {...state, showForget:false, showReset:true };
     default:
       return state;
   }

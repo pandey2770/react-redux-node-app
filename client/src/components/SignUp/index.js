@@ -61,7 +61,7 @@ class SignUp extends Component {
                     type="text" 
                     className="form-control"
                     name="username" 
-                    placeholder="User Name" 
+                    placeholder="Email" 
                     value={username}  
                     onChange={this.change}/>
                   </div>

@@ -4,6 +4,7 @@ import Home from '../Home';
 import Login from '../Login';
 import SignUp from '../SignUp';
 import Forget from '../Forget';
+import NewPwd from '../NewPwd'
 import './styles.css';
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           </Switch>
         <Forget />
+        <NewPwd />
       </div>
     )
   }

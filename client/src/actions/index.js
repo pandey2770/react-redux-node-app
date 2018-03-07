@@ -151,7 +151,25 @@ export const updateTaskDispatch = (id, state) => {
 
 export const send = email => {
   return async function(dispatch) {
-    await axios.get(`/api/forget/${email}`);
-    return dispatch(close());
+    const {data} = await axios.get(`/api/forget/${email}`);
+    if (data==='done'){
+      return dispatch(forgetDone(data));      
+    }else {
+      return dispatch(forgetError(data));
+    }  
   }
 }
+
+export const forgetDone = (data) => {
+  return {
+    type: 'RESET',
+    data
+  };
+};
+
+export const forgetError = data => {
+  return {
+    type: 'NOT',
+    data
+  };
+};

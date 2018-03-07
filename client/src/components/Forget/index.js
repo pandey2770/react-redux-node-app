@@ -5,8 +5,18 @@ import { close, send } from '../../actions';
 class Forget extends Component {
   state = {
     email: '',
-    span:''
+    span:false,
+    error:false,
   };
+
+  componentWillReceiveProps(nextProps){
+    const {error} = nextProps;
+    if(error[0]==='error'){
+      this.setState({
+        error: true
+      });
+    }
+  }
 
   componentDidMount() {
     document.addEventListener('keyup', e => {
@@ -22,29 +32,20 @@ class Forget extends Component {
 
   close = () => {
     this.props.close();
-    this.setState({
-      span:''
-    })
   }
 
   send = () => {
     const { email, span } = this.state;
-    const { number } = Math.floor(Math.random() * 10000);    
-    if(span===''){
+    this.props.send(email);    
+    if(span){
       this.setState({
-        span:'span'
+        span:!span
       })
-    }
-    else{
-      this.props.send(email);
-      this.setState({
-        span:''
-      })  
     }
   }
 
   render() {
-    const { email, span } = this.state;
+    const { email, span, error } = this.state;
     if (!this.props.popUp) {
       return null;
     }
@@ -66,12 +67,12 @@ class Forget extends Component {
                 name="email"
                 value={email}
                 onChange={this.updateInput}
-                className="form-control"
+                className='form-control'
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
               />
             </div>
-            {span=== 'span'?
+            {span === 'span'?
               <span>Please enter your Email</span>
               :
               null              
@@ -84,6 +85,13 @@ class Forget extends Component {
                 className="btn button btn-primary"
               />
             </div>
+            <div className='error'>
+            {!error?
+            null
+            :
+            <span>Please Check Your Email</span>
+            }
+            </div>
           </form>
         </div>
       </div>
@@ -94,7 +102,8 @@ class Forget extends Component {
 
 function mapStateToprpos(state) {
   return {
-    popUp:state.popUp.showForget,    
+    popUp:state.popUp.showForget,
+    error:state.error,    
   };
 }
 

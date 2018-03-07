@@ -173,3 +173,7 @@
   border: 1px solid gray;
   background-color: #f8f9fa;
 }
+.error{
+  margin-top:10px;
+  color: red;
+}

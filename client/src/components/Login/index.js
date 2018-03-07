@@ -54,7 +54,7 @@ class Login extends Component {
                   type="text" 
                   className={error} 
                   name="username" 
-                  placeholder="username" 
+                  placeholder="Email" 
                   value={username}  
                   onChange={this.change}/>
                 </div>
