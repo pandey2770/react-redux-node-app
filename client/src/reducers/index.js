@@ -40,20 +40,26 @@ const error = (state ={ }, action) => {
     case 'NOT':
       return [...state, action.data];
     case 'RESET':
-      return [...state, action.data];
+      return [...state];
+    case 'NEWPWD':
+      return [...state];
+    case 'VERIFYERROR':
+      return [...state, 'error']
     default:
       return state;
   }
 };
 
-const popUp = ( state = { showForget: false, showReset:false },action) => {
+const popUp = ( state = { showForget: false, showReset:false, showPassword:false },action) => {
   switch (action.type) {
     case 'FORGET':
-      return { ...state, showForget: true };
+      return { ...state, showForget: true,showPassword:false, showReset:false };
     case 'CLOSE':
-      return { ...state, showForget: false };
+      return { ...state, showForget: false,showPassword:false, showReset:false };
     case 'RESET':
-      return {...state, showForget:false, showReset:true };
+      return {...state, showForget:false, showReset:true,showPassword:false };
+    case 'NEWPWD':
+      return {...state,showForget: false, showReset:false, showPassword:true}
     default:
       return state;
   }

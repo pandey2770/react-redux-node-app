@@ -150,12 +150,13 @@ export const updateTaskDispatch = (id, state) => {
 };
 
 export const send = email => {
+  const otp = Math.floor(Math.random() * 1000000);  
   return async function(dispatch) {
-    const {data} = await axios.get(`/api/forget/${email}`);
-    if (data==='done'){
-      return dispatch(forgetDone(data));      
+    const {data} = await axios.put(`/api/forget/${email}`,{otp});
+    if (data===email){
+      return dispatch(forgetDone(data));
     }else {
-      return dispatch(forgetError(data));
+      return dispatch(forgetError('error'));  
     }  
   }
 }
@@ -171,5 +172,26 @@ export const forgetError = data => {
   return {
     type: 'NOT',
     data
+  };
+};
+
+export const verify = (email, otp) => {
+  return async function(dispatch) {
+    const {data} = await axios.get(`/api/verify/${email}/${otp}`);
+    if(data.length>0){
+      return dispatch(verifyForget());      
+    } return dispatch(verifyError());    
+  }
+}
+
+export const verifyForget = () => {
+  return {
+    type: 'NEWPWD',
+  };
+};
+
+export const verifyError = () => {
+  return {
+    type: 'VERIFYERROR',
   };
 };

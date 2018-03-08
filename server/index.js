@@ -8,7 +8,6 @@ var User = require('./src/user');
 var tasks = require('./src/tasks');
 var bodyParser = require('body-parser');
 
-
 var app = express();
   app.use(express.static("public"));
   app.use(session({
@@ -25,7 +24,8 @@ var app = express();
 
   app.post('/api/signUp',  async (req, res) => {
     try {
-      const data = await User.signUp(req.body.name,req.body.username,req.body.password);
+      const key = Math.floor(Math.random() * 1000000);
+      const data = await User.signUp(req.body.name,req.body.username,req.body.password,key);
       passport.authenticate('local')(req, res, function () {
         res.sendStatus(200);
       });
@@ -76,16 +76,20 @@ var app = express();
     res.json({ id: req.user.id });
   });
 
-  app.get('/api/forget/:email' , async (req,res) => {
-    const number = Math.floor(Math.random() * 1000000);
-    const data = await User.get(req.params.email);
-    if( data.length >0 ){
-      res.json(data)
+  app.get('/api/verify/:email/:otp', async (req,res) => {
+    const data = await User.check(req.params.email, req.params.otp);
+    res.json(data)
+  })
+
+  app.put('/api/forget/:email' , async (req,res) => {
+    const data = await User.verify(req.params.email,req.body.otp);
+    if( data ){
+      res.json(req.params.email)
       let transporter = nodemailer.createTransport({
         service: 'gmail', 
               auth: {
                 user: 'pandey.abhishek2770@gmail.com', 
-                pass: 'Godfather.'
+                pass: ''
             },
               tls:{
                 rejectUnauthorized:false
@@ -96,7 +100,7 @@ var app = express();
               from: 'Tasks',
               to: req.params.email,
               subject: 'test',
-              text: `test ${number}`
+              text: `test ${req.body.otp}`
           };
           transporter.sendMail(mailOptions, (error, info) => {
               if (error) {

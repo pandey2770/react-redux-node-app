@@ -51,7 +51,7 @@ class Login extends Component {
               <div className="login-group">
                 <div className="form-group">
                   <input 
-                  type="text" 
+                  type="email" 
                   className={error} 
                   name="username" 
                   placeholder="Email" 

@@ -58,7 +58,7 @@ class SignUp extends Component {
                   </div>
                   <div className="form-group">
                     <input 
-                    type="text" 
+                    type="email" 
                     className="form-control"
                     name="username" 
                     placeholder="Email" 

@@ -72,11 +72,6 @@ class Forget extends Component {
                 placeholder="Enter email"
               />
             </div>
-            {span === 'span'?
-              <span>Please enter your Email</span>
-              :
-              null              
-              }
             <div className="button-style">
               <input
                 type="button"
@@ -110,7 +105,7 @@ function mapStateToprpos(state) {
 function mapDispatchToProps(dispatch) {
   return {
     close: () => dispatch(close()),
-    send:(email) => dispatch(send(email))
+    send:(email) => dispatch(send(email)),
   };
 }
 

@@ -19,19 +19,38 @@ async function getById(id) {
   return await DB.get(query);
 }
 
-async function signUp(name, email, password) {
+async function signUp(name, email, password, key) {
   const id = uuidv1();
   const pwd = await cryptPassword(password);
   const query = {
-    text: "INSERT INTO usertable (id , name , email, password) VALUES ($1, $2, $3, $4)",
-    values: [id, name ,email, pwd],  
+    text: "INSERT INTO usertable (id , name , email, password, key) VALUES ($1, $2, $3, $4, $5)",
+    values: [id, name ,email, pwd, key],  
   };
   await DB.mutate(query);
   return id;
 }
 
+async function verify(email,key){
+  const query = {
+    text: "UPDATE usertable SET key = $2 WHERE email = $1 ",
+    values: [ email, key ],
+  };
+  return await DB.mutate(query);
+}
+
+async function check(email, key) {
+  const query = {
+    text: "SELECT * FROM usertable WHERE email = $1 and key = $2",
+    values: [email, key]
+  }
+  const users = await DB.get(query);
+  return users;
+}
+
 module.exports = {
   get,
   signUp,
-  getById
+  getById,
+  verify,
+  check
 };

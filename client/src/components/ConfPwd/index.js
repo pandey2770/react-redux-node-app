@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { send, verify } from '../../actions';
+import {  } from '../../actions';
 
 class newPwd extends Component {
   state = {
-    email: '',
-    otp:'',
-    error:false,    
+    password:'',
+    confirmPassword:'',
+    error:'form-control'
   };
 
-
-  componentWillReceiveProps(nextProps){
-    const {error} = nextProps;
-    if(error[0]==='error'){
-      this.setState({
-        error: true
-      });
-    }
-  }
-
-
   send = () => {
-    const { email, otp } = this.state;
-    this.props.verify(email,otp);    
+    const { confirmPassword, password } = this.state;
+    if (password !== confirmPassword) {
+      this.setState({
+        error:'className'
+      })
+      return false;
+    }
+    return this.props.
   }
 
   updateInput = event => {
@@ -33,7 +28,7 @@ class newPwd extends Component {
 
 
   render() {
-    const { email, otp, error } = this.state;    
+    const { password, error,confirmPassword } = this.state;    
     if (!this.props.popUp) {
       return null;
     }
@@ -44,22 +39,22 @@ class newPwd extends Component {
           <form>
             <div className="form-group">
               <input
-                type="email"
+                type="password"
                 onChange={this.updateInput}
-                className='form-control'
-                placeholder="Email"
-                value={email}
-                name='email'
+                className={error} 
+                placeholder="Password"
+                value={password}
+                name='password'
               />
             </div>
             <div className="form-group">
               <input
                 type="password"
                 onChange={this.updateInput}
-                className='form-control'
-                placeholder="OTP"
-                value={otp}
-                name='otp'
+                className={error} 
+                placeholder="confirm Password"
+                value={confirmPassword}
+                name='confirmPassword'
               />
             </div>
             <div className="button-style">
@@ -71,13 +66,6 @@ class newPwd extends Component {
               />
             </div>
           </form>
-          <div className='error'>
-            {!error?
-            null
-            :
-            <span>Please Check Your Email or OTP</span>
-            }
-            </div>
         </div>
       </div>
     );
@@ -87,15 +75,12 @@ class newPwd extends Component {
 
 function mapStateToprpos(state) {
   return {
-    popUp:state.popUp.showReset,
-    error:state.error,    
+    popUp:state.popUp.showPassword,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    send:(email) => dispatch(send(email)),
-    verify:(email,otp) => dispatch(verify(email,otp))
   };
 }
 
