@@ -38,13 +38,13 @@ async function verify(email,key){
   return await DB.mutate(query);
 }
 
-async function check(email, key) {
+async function reset(newPassword, key) {
+  const pwd = await cryptPassword(newPassword);
   const query = {
-    text: "SELECT * FROM usertable WHERE email = $1 and key = $2",
-    values: [email, key]
+    text: "UPDATE usertable SET password = $1 WHERE key = $2",
+    values: [pwd, key]
   }
-  const users = await DB.get(query);
-  return users;
+  return await DB.mutate(query);    
 }
 
 module.exports = {
@@ -52,5 +52,5 @@ module.exports = {
   signUp,
   getById,
   verify,
-  check
+  reset
 };

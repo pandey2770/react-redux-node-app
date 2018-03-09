@@ -5,7 +5,6 @@ import Login from '../Login';
 import SignUp from '../SignUp';
 import Forget from '../Forget';
 import NewPwd from '../NewPwd'
-import ConfPwd from '../ConfPwd'
 import './styles.css';
 
 class App extends Component {
@@ -20,7 +19,6 @@ class App extends Component {
           </Switch>
         <Forget />
         <NewPwd />
-        <ConfPwd />
       </div>
     )
   }

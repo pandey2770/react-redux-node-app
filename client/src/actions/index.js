@@ -175,12 +175,14 @@ export const forgetError = data => {
   };
 };
 
-export const verify = (email, otp) => {
+export const verify = (newPassword, otp) => {
   return async function(dispatch) {
-    const {data} = await axios.get(`/api/verify/${email}/${otp}`);
-    if(data.length>0){
+    const {data} = await axios.put('/api/verify',{newPassword,otp});
+    if(data===otp){
       return dispatch(verifyForget());      
-    } return dispatch(verifyError());    
+    }else{
+      return dispatch(verifyError(data));
+    }
   }
 }
 
@@ -190,8 +192,9 @@ export const verifyForget = () => {
   };
 };
 
-export const verifyError = () => {
+export const verifyError = data => {
   return {
-    type: 'VERIFYERROR',
+    type: 'OTOERROR',
+    data
   };
 };

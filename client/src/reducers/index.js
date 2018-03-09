@@ -38,28 +38,26 @@ const error = (state ={ }, action) => {
     case 'ERROR':
     return [ ...state, action.data ]; 
     case 'NOT':
-      return [...state, action.data];
+      return [ ...state, action.data ];
     case 'RESET':
-      return [...state];
-    case 'NEWPWD':
-      return [...state];
-    case 'VERIFYERROR':
-      return [...state, 'error']
+      return [ ...state];
+    case 'OTOERROR':
+      return [ ...state ,action.data ];
     default:
       return state;
   }
 };
 
-const popUp = ( state = { showForget: false, showReset:false, showPassword:false },action) => {
+const popUp = ( state = { showForget: false, showReset:false,pwd:false },action) => {
   switch (action.type) {
     case 'FORGET':
-      return { ...state, showForget: true,showPassword:false, showReset:false };
+      return { ...state, showForget: true, showReset:false,pwd:false };
     case 'CLOSE':
-      return { ...state, showForget: false,showPassword:false, showReset:false };
+      return { ...state, showForget: false, showReset:false,pwd:false };
     case 'RESET':
-      return {...state, showForget:false, showReset:true,showPassword:false };
+      return {...state, showForget:false, showReset:true,pwd:false };
     case 'NEWPWD':
-      return {...state,showForget: false, showReset:false, showPassword:true}
+      return {...state, showForget:false, showReset:true, pwd:true}
     default:
       return state;
   }

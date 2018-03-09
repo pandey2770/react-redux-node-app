@@ -72,13 +72,18 @@ var app = express();
   });
 
   app.put('/api/tasks', async (req, res) => {
-    await tasks.updateTask(req.user.id, req.body.id,req.body.state);
+    const data = await tasks.updateTask(req.user.id, req.body.id,req.body.state);
     res.json({ id: req.user.id });
   });
 
-  app.get('/api/verify/:email/:otp', async (req,res) => {
-    const data = await User.check(req.params.email, req.params.otp);
-    res.json(data)
+  app.put('/api/verify', async (req,res) => {
+    const result = await User.reset(req.body.newPassword, req.body.otp);
+    if (result){
+      res.json(req.body.otp)      
+    }else{
+      res.json('error')
+      
+    }
   })
 
   app.put('/api/forget/:email' , async (req,res) => {
@@ -97,19 +102,18 @@ var app = express();
           });
       
           let mailOptions = {
-              from: 'Tasks',
+              from: 'Task',
               to: req.params.email,
-              subject: 'test',
-              text: `test ${req.body.otp}`
+              subject: 'OTP',
+              html: `<p>Task App sends you OTP for ${req.params.email} is</P><b>${req.body.otp}</b>`
           };
           transporter.sendMail(mailOptions, (error, info) => {
               if (error) {
                   return console.log(error);
               }
               console.log('Message sent: %s', info.messageId);
-              console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
       });
-    } else {
+    }else {
         res.json('error')
       }
   })
