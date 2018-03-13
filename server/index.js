@@ -25,7 +25,7 @@ var app = express();
   app.post('/api/signUp',  async (req, res) => {
     try {
       const key = Math.floor(Math.random() * 1000000);
-      const data = await User.signUp(req.body.name,req.body.username,req.body.password,key);
+      await User.signUp(req.body.name,req.body.username,req.body.password,key);
       passport.authenticate('local')(req, res, function () {
         res.sendStatus(200);
       });

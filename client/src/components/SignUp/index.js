@@ -11,8 +11,17 @@ class SignUp extends Component {
     name:'',
     password: '',
     confirmPassword: '',
+    error:'form-control'    
   };
 
+  componentWillReceiveProps(nextProps){
+    const {error} = nextProps;
+    if(error[0]==='className'){
+      this.setState({
+        error: error[0]
+      });
+    }
+  }
 
   change = event => {
     this.setState({
@@ -37,7 +46,7 @@ class SignUp extends Component {
 
 
   render () {
-    const { username, name ,password, confirmPassword } = this.state;    
+    const { username, name ,password, confirmPassword, error } = this.state;    
     const { history, location } = this.props;    
     return (
       <div>
@@ -59,12 +68,16 @@ class SignUp extends Component {
                   <div className="form-group">
                     <input 
                     type="email" 
-                    className="form-control"
+                    className={error}
                     name="username" 
                     placeholder="Email" 
                     value={username}  
                     onChange={this.change}/>
                   </div>
+                  {error !=='className'?
+                    null
+                  :
+                    <span>Email Already Exists</span>}
                   <div className="form-group">
                     <input 
                     type="password" 
@@ -104,6 +117,7 @@ class SignUp extends Component {
 
 function mapStateToprpos(state) {
   return {
+    error:state.error,    
   };
 }
 
