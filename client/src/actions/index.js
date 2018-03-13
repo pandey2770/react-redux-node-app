@@ -25,16 +25,15 @@ export const loginUserDispatch = data => {
 
 export const show = () => {
   return {
-    type:'FORGET'
-  }
-}
+    type: 'FORGET'
+  };
+};
 
 export const close = () => {
   return {
-    type:'CLOSE'
-  }
-}
-
+    type: 'CLOSE'
+  };
+};
 
 // loginUser
 
@@ -65,13 +64,15 @@ export const getLogoutDispatch = () => {
 
 export const signUp = (history, username, name, password) => {
   return async function(dispatch) {
-    axios.post('/api/signUp', { username, name, password }).then(() => {
-      history.push('/');
-      return dispatch(getUserDispatch({ email: username }));
-    },
-    response => {
-      return dispatch(alert('className'));
-    });
+    axios.post('/api/signUp', { username, name, password }).then(
+      () => {
+        history.push('/');
+        return dispatch(getUserDispatch({ email: username }));
+      },
+      response => {
+        return dispatch(alert('className'));
+      }
+    );
   };
 };
 
@@ -136,7 +137,7 @@ export const deleteTaskDispatch = id => {
 
 export const updateTask = (id, state) => {
   return async function(dispatch) {
-    await axios.put('/api/tasks', {id, state });
+    await axios.put('/api/tasks', { id, state });
     return dispatch(updateTaskDispatch(id, state));
   };
 };
@@ -150,18 +151,18 @@ export const updateTaskDispatch = (id, state) => {
 };
 
 export const send = email => {
-  const otp = Math.floor(Math.random() * 1000000);  
+  const otp = Math.floor(Math.random() * 1000000);
   return async function(dispatch) {
-    const {data} = await axios.put(`/api/forget/${email}`,{otp});
-    if (data===email){
+    const { data } = await axios.put(`/api/forget/${email}`, { otp });
+    if (data === email) {
       return dispatch(forgetDone(data));
-    }else {
-      return dispatch(forgetError('error'));  
-    }  
-  }
-}
+    } else {
+      return dispatch(forgetError('error'));
+    }
+  };
+};
 
-export const forgetDone = (data) => {
+export const forgetDone = data => {
   return {
     type: 'RESET',
     data
@@ -177,18 +178,18 @@ export const forgetError = data => {
 
 export const verify = (newPassword, otp) => {
   return async function(dispatch) {
-    const {data} = await axios.put('/api/verify',{newPassword,otp});
-    if(data===otp){
-      return dispatch(verifyForget());      
-    }else{
+    const { data } = await axios.put('/api/verify', { newPassword, otp });
+    if (data === otp) {
+      return dispatch(verifyForget());
+    } else {
       return dispatch(verifyError(data));
     }
-  }
-}
+  };
+};
 
 export const verifyForget = () => {
   return {
-    type: 'NEWPWD',
+    type: 'NEWPWD'
   };
 };
 

@@ -7,12 +7,12 @@ const userReducer = (state = { user: null }, action) => {
     case 'LOGGEDIN_USER':
       return { ...state, user: action.data };
     case 'LOGOUT_USER':
-      return { ...state, user: null };  
+      return { ...state, user: null };
     default:
       return state;
   }
 };
- 
+
 function task(state = [], action) {
   let index;
   switch (action.type) {
@@ -25,7 +25,7 @@ function task(state = [], action) {
       state.splice(index, 1);
       return [...state];
     case 'UPDATE_TASK':
-      index = state.findIndex(task => task.des ===  action.id);
+      index = state.findIndex(task => task.des === action.id);
       state[index] = { ...state[index], state: action.state };
       return [...state];
     default:
@@ -33,39 +33,42 @@ function task(state = [], action) {
   }
 }
 
-const error = (state ={ }, action) => {
+const error = (state = {}, action) => {
   switch (action.type) {
     case 'ERROR':
-    return [ ...state, action.data ]; 
+      return [...state, action.data];
     case 'NOT':
-      return [ ...state, action.data ];
+      return [...state, action.data];
     case 'RESET':
-      return [ ...state];
+      return [...state];
     case 'OTOERROR':
-      return [ ...state ,action.data ];
+      return [...state, action.data];
     default:
       return state;
   }
 };
 
-const popUp = ( state = { showForget: false, showReset:false,pwd:false },action) => {
+const popUp = (
+  state = { showForget: false, showReset: false, pwd: false },
+  action
+) => {
   switch (action.type) {
     case 'FORGET':
-      return { ...state, showForget: true, showReset:false,pwd:false };
+      return { ...state, showForget: true, showReset: false, pwd: false };
     case 'CLOSE':
-      return { ...state, showForget: false, showReset:false,pwd:false };
+      return { ...state, showForget: false, showReset: false, pwd: false };
     case 'RESET':
-      return {...state, showForget:false, showReset:true,pwd:false };
+      return { ...state, showForget: false, showReset: true, pwd: false };
     case 'NEWPWD':
-      return {...state, showForget:false, showReset:true, pwd:true}
+      return { ...state, showForget: false, showReset: true, pwd: true };
     default:
       return state;
   }
 };
 
 export default combineReducers({
-  error:error,  
+  error: error,
   user: userReducer,
   task: task,
-  popUp:popUp
+  popUp: popUp
 });

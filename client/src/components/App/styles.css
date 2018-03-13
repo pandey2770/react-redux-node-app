@@ -28,13 +28,13 @@
 .task_new {
   background: #839dbb;
   margin-top: 5px;
-  color: white;  
+  color: white;
 }
 .task_done {
   background-color: #839dbb;
   opacity: .5;
   color: white;
-  margin-top: 5px;  
+  margin-top: 5px;
   text-decoration: line-through;
 }
 .button-come {
@@ -71,7 +71,7 @@
   margin-left: -100px;
 }
 .guide {
-  margin:75px;
+  margin: 75px;
   min-width: 300px;
 }
 .header-wrapper {
@@ -91,7 +91,7 @@
 }
 .taskDiv {
   height: 100%;
-  width: 100%
+  width: 100%;
 }
 .header-menu {
   justify-content: center;
@@ -101,7 +101,7 @@
   font-size: 35px;
   background-color: #839dbb;
   color: white;
-  min-width: 300px;  
+  min-width: 300px;
 }
 .header-logo {
   height: 55px;
@@ -173,8 +173,8 @@
   border: 1px solid gray;
   background-color: #f8f9fa;
 }
-.error{
-  margin-top:10px;
+.error {
+  margin-top: 10px;
   color: red;
 }
 .confirm {
